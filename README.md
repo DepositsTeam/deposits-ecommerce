@@ -5,7 +5,7 @@
 
 [![pub package](https://img.shields.io/pub/v/flutter_stripe.svg)](https://pub.dev/packages/deposits_commerce)
 
-The Deposits commerce SDk is an easy to embed commerce system for  allowing creators to setup and operate an online store without owning an e-commerce website. Empowering vendors to launch commerce feature without the engineering time at less the cost of building commerce capabilities internally. Shoppers can view products and checkout one item at a time from each vendor's store without leaving the application .
+The Deposits commerce SDK is an easy to embed commerce system for  allowing creators to setup and operate an online store without owning an e-commerce website. Empowering vendors to launch commerce feature without the engineering time at less the cost of building commerce capabilities internally. Shoppers can view products and checkout one item at a time from each vendor's store without leaving the application .
 
 ![deposits-one-click-checkout-flutter_cover](https://assets.deposits.com/img/checkout/sdk-banner.png)
 

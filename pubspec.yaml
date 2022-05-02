@@ -1,7 +1,7 @@
 name: deposits_ecommerce
 description: A package to enables users to purchase products through deposits.
 version: 0.0.2
-homepage: https://gitlab.com/yourex.io/mobile_apps/checkout/ecommerce_sdk
+homepage: https://github.com/DepositsTeam/deposits-ecommerce
 
 false_secrets:
   - /lib/app/modules/google_search/places_service.dart
