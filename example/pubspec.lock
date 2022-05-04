@@ -77,14 +77,14 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.2"
+    version: "0.0.3"
   deposits_oneclick_checkout:
     dependency: transitive
     description:
       name: deposits_oneclick_checkout
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.3"
+    version: "0.0.4"
   dio:
     dependency: transitive
     description:
