@@ -146,8 +146,8 @@ class _AssetsGalleryState extends State<AssetsGallery>with WidgetsBindingObserve
                   ? AppColors.black
                   : AppColors.white),
           buttonColor: controller.selectedAssets.isNotEmpty
-              ? AppColors.activButtonColor
-              : AppColors.inActivButtonColor,
+              ? AppColors.activButtonColor()
+              : AppColors.inActivButtonColor(),
         )));
   }
 //------------------------------------------------------

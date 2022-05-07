@@ -20,7 +20,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
        appBar: CustomAppbarWidget(
           centerTitle: true,
           addBackButton: true,
-          backgroundColor: AppColors.activButtonColor,
+          backgroundColor: AppColors.activButtonColor(),
           backbuttonColor: AppColors.white,
           textColor: AppColors.white,
           title: "#"+widget.orderData!.uuid!,
@@ -74,7 +74,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
 //-------------------------------------------------------
 Widget fromWho(){
   return Container(
-    color: AppColors.activButtonColor,
+    color: AppColors.activButtonColor(),
     height: 200,
     alignment: Alignment.topCenter,
     width: Get.width,

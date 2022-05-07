@@ -3,8 +3,7 @@ import 'package:intl/intl.dart';
 
 class EcomPayments extends StatefulWidget {
   final String merchantID;
-  EcomPayments({Key? key, required this.merchantID})
-      : super(key: key);
+  EcomPayments({Key? key, required this.merchantID}) : super(key: key);
 
   @override
   State<EcomPayments> createState() => _EcomPaymentsState();
@@ -141,14 +140,16 @@ class _EcomPaymentsState extends State<EcomPayments>
                           ]))),
 
               // bottom content
-               Obx(() => controller.hideShowLogo.isTrue? Column(
-              children: [depositsLogo()],
-            ):const SizedBox()
-              )
+              Obx(() => controller.hideShowLogo.isTrue
+                  ? Column(
+                      children: [depositsLogo()],
+                    )
+                  : const SizedBox())
             ])));
       }),
     );
   }
+
 //-------------------------------------------------------
   Widget noPaymentData() {
     return Obx(() => Column(children: [
@@ -157,28 +158,28 @@ class _EcomPaymentsState extends State<EcomPayments>
             height: 20,
           ),
           Expanded(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CustomSvgimage(
-                            image: AppImages.noPayments,
-                          ),
-                          verticalSpaceTiny,
-                          const CustomText(
-                            text: Strings.noPaymentYet,
-                            txtAlign: TextAlign.center,
-                          ),
-                          verticalSpaceTiny,
-                          const CustomText(
-                            text: Strings.allPaymentShowHere,
-                            txtAlign: TextAlign.center,
-                            font: Dimens.fontSize15,
-                            fntweight: FontWeight.w200,
-                          ),
-                          verticalSpaceSmall,
-                        ],
-                      )),
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomSvgimage(
+                image: AppImages.noPayments,
+              ),
+              verticalSpaceTiny,
+              const CustomText(
+                text: Strings.noPaymentYet,
+                txtAlign: TextAlign.center,
+              ),
+              verticalSpaceTiny,
+              const CustomText(
+                text: Strings.allPaymentShowHere,
+                txtAlign: TextAlign.center,
+                font: Dimens.fontSize15,
+                fntweight: FontWeight.w200,
+              ),
+              verticalSpaceSmall,
+            ],
+          )),
           //bottome
           Column(
             children: [depositsLogo()],
@@ -204,12 +205,12 @@ class _EcomPaymentsState extends State<EcomPayments>
 //-------------------------------------------------------
   Widget depositsLogo() {
     return Container(
-          alignment: Alignment.bottomCenter,
-          margin: const EdgeInsets.symmetric(vertical: (5)),
-          child: CustomSvgimage(image: AppImages.depositsLogo,
+        alignment: Alignment.bottomCenter,
+        margin: const EdgeInsets.symmetric(vertical: (5)),
+        child: CustomSvgimage(
+          image: AppImages.depositsLogo,
           width: 200,
-        )
-    );
+        ));
   }
 
 //-------------------------------------------------------
@@ -356,7 +357,8 @@ class _EcomPaymentsState extends State<EcomPayments>
                       onTap: () {
                         Utils.navigationPush(
                             context,
-                            PaymentDetails(orderData: item,
+                            PaymentDetails(
+                              orderData: item,
                             ));
                       },
                       subTitle: item.products!.length == 1
@@ -404,7 +406,7 @@ class _EcomPaymentsState extends State<EcomPayments>
                 children: [
                   Row(
                     children: [
-                      CustomSvgimage(image: AppImages.download),
+                      CustomSvgimage(image: AppImages.download, color: AppColors.activButtonColor(),),
                       horizontalSpaceSmall,
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -438,8 +440,8 @@ class _EcomPaymentsState extends State<EcomPayments>
                               ? AppColors.black
                               : AppColors.white),
                       buttonColor: controller.isExportSelector.value
-                          ? AppColors.activButtonColor
-                          : AppColors.inActivButtonColor,
+                          ? AppColors.activButtonColor()
+                          : AppColors.inActivButtonColor(),
                     )),
               )
             ],
@@ -594,8 +596,8 @@ class _EcomPaymentsState extends State<EcomPayments>
                                       ? AppColors.white
                                       : AppColors.black),
                               buttonColor: controller.validateInput() == false
-                                  ? AppColors.inActivButtonColor
-                                  : AppColors.activButtonColor,
+                                  ? AppColors.inActivButtonColor()
+                                  : AppColors.activButtonColor(),
                             )),
                         verticalSpaceSmall,
                       ],
@@ -690,7 +692,7 @@ class _EcomPaymentsState extends State<EcomPayments>
                               isBusy: controller.isBottomLoading.value,
                               textStyle:
                                   const TextStyle(color: AppColors.black),
-                              buttonColor: AppColors.activButtonColor,
+                              buttonColor: AppColors.activButtonColor(),
                             ))),
                     verticalSpaceMedium,
                   ],

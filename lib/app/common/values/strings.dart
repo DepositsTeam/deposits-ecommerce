@@ -146,7 +146,7 @@ class Strings {
   static const editTaxFee = 'Edit taxes and fees';
   static const addTaxFee = 'Add taxes and fees';
   static const dashboard= 'Dashboard';
-  static const shopNameDec= 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sagittis, tortor at faucibus . Visit our';
+  // static const shopNameDec= 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sagittis, tortor at faucibus . Visit our';
   static const and = 'and';
   static const enterIssue = 'Enter your issue';
   static const pageOr = 'page or';

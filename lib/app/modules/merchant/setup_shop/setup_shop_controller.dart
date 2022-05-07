@@ -230,8 +230,8 @@ class SetUpShopController extends GetxController {
           GetMerchantEmailResponse emailResponse =
               GetMerchantEmailResponse.fromJson(response.data);
           if (emailResponse.status == Strings.success) {
-            print(
-                'derived deposits email : ${emailResponse.data!.id.toString()}');
+            // print(
+            //     'derived deposits email : ${emailResponse.data!.id.toString()}');
             depositsUserId.value = emailResponse.data!.id.toString();
             depositsUserEmail.value = emailResponse.data!.email.toString();
             isDepositsIdDerived(true);

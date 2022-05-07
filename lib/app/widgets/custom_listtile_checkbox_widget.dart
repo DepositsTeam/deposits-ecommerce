@@ -64,8 +64,8 @@ class _CustomListTileCheckBoxWidgetState
                                   width: 15.0,
                                   height: 15.0,
                                   alignment: Alignment.center,
-                                  decoration: const BoxDecoration(
-                                    color: AppColors.activButtonColor,
+                                  decoration:  BoxDecoration(
+                                    color: AppColors.activButtonColor(),
                                   ),
                                   child: const Center(
                                       child: Icon(

@@ -305,7 +305,7 @@ class _HomeMenuState extends State<HomeMenu> with WidgetsBindingObserver {
           CustomText(
             text: 'See all',
             font: 14,
-            txtColor: AppColors.borderButtonColor2,
+            txtColor: AppColors.borderButtonColor2(),
             nav: () {
               Utils.navigationPush(
                   context,

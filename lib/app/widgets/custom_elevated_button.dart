@@ -6,7 +6,8 @@ class CustomElevatedButton extends StatelessWidget {
   final TextStyle? textStyle;
   final double height, minWidth;
   final Widget? titleWidget;
-  final Color buttonColor,buttonBorderColor, textColor, loaderColor;
+  final Color? buttonColor, buttonBorderColor;
+  final Color textColor, loaderColor;
   final bool addBorder;
   final bool isBusy;
 
@@ -17,8 +18,8 @@ class CustomElevatedButton extends StatelessWidget {
     this.textStyle,
     this.height = 55,
     this.minWidth = 100,
-    this.buttonColor = AppColors.activButtonColor,
-    this.buttonBorderColor = AppColors.borderButtonColor,
+    this.buttonColor,
+    this.buttonBorderColor,
     this.textColor = AppColors.black,
     this.loaderColor = AppColors.white,
     this.titleWidget,
@@ -48,9 +49,7 @@ class CustomElevatedButton extends StatelessWidget {
                 (states) => RoundedRectangleBorder(
                   borderRadius:BorderRadius.circular(2),
                   side: BorderSide(
-                    color: buttonColor == AppColors.activButtonColor
-                        ? Colors.white
-                        : buttonBorderColor,
+                    color: AppColors.activButtonColor(),
                     width: 2,
                   ),
                 ),
@@ -73,9 +72,9 @@ class CustomElevatedButton extends StatelessWidget {
         backgroundColor: MaterialStateProperty.resolveWith<Color>(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
-              return buttonColor.withOpacity(.50);
+              return buttonColor!.withOpacity(.50);
             }
-            return  !isBusy? buttonColor : buttonColor.withOpacity(0.6);
+            return  !isBusy? buttonColor! : buttonColor!.withOpacity(0.6);
           },
         ),
       ),

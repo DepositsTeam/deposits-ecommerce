@@ -145,8 +145,8 @@ Widget returnPolicyInput() {
                   ? AppColors.black
                   : AppColors.white),
           buttonColor: controller.validateInput()
-              ? AppColors.activButtonColor
-              : AppColors.inActivButtonColor,
+              ? AppColors.activButtonColor()
+              : AppColors.inActivButtonColor(),
         )));
   }
 //-------------------------------------------------------

@@ -406,7 +406,7 @@ class _ViewShopItemDetailState extends State<ViewShopItemDetail>
         .firstWhere((element) => element.isDefaultAddress == 'true');
     return CustomListTileWidget(
       title: addresss.streetAddress ?? '',
-      leading: CustomSvgimage(image: AppImages.location),
+      leading: CustomSvgimage(image: AppImages.location, color: AppColors.activButtonColor()),
       onTap: () {
         Utils.navigationPush(
             context,

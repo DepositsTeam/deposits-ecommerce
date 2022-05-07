@@ -114,7 +114,7 @@ class _ViewAsUserShopsState extends State<ViewAsUserShops> with WidgetsBindingOb
       alignment: Alignment.topCenter,
       margin: const EdgeInsets.symmetric(vertical: (18)),
       child: CustomRichTextWidget(
-        title1: Strings.shopNameDec,
+        title1: controller.merchantData.value.description,
         title2: Strings.shipping,
         onSubtitleTap2: () => shippingOnClick(),
         title3: Strings.and,
@@ -335,7 +335,7 @@ class _ViewAsUserShopsState extends State<ViewAsUserShops> with WidgetsBindingOb
                               title: Strings.filter,
                               isBusy: controller.isLoading.value,
                               textStyle: TextStyle(color: AppColors.black),
-                              buttonColor: AppColors.activButtonColor,
+                              buttonColor: AppColors.activButtonColor(),
                             )))
                       ],
                     )));

@@ -37,7 +37,7 @@ class _DashboardState extends State<Dashboard> {
             ),
             bottomNavigationBar: BottomNavigationBar(
                 unselectedItemColor: AppColors.doveGray,
-                selectedItemColor: AppColors.activButtonColor,
+                selectedItemColor: AppColors.activButtonColor(),
                 onTap: controller.changeTabIndex,
                 currentIndex: controller.tabIndex.value,
                 showSelectedLabels: true,
@@ -50,7 +50,7 @@ class _DashboardState extends State<Dashboard> {
                   BottomNavigationBarItem(
                       icon: SvgPicture.asset(AppImages.home,
                           color: controller.tabIndex.value == 0
-                              ? AppColors.activButtonColor
+                              ? AppColors.activButtonColor()
                               : AppColors.doveGray,
                           package: 'deposits_ecommerce'),
                       label: ''),
@@ -59,7 +59,7 @@ class _DashboardState extends State<Dashboard> {
                         AppImages.payments,
                         package: 'deposits_ecommerce',
                         color: controller.tabIndex.value == 1
-                            ? AppColors.activButtonColor
+                            ? AppColors.activButtonColor()
                             : AppColors.doveGray,
                       ),
                       label: ''),
@@ -68,7 +68,7 @@ class _DashboardState extends State<Dashboard> {
                         AppImages.products,
                         package: 'deposits_ecommerce',
                         color: controller.tabIndex.value == 2
-                            ? AppColors.activButtonColor
+                            ? AppColors.activButtonColor()
                             : AppColors.doveGray,
                       ),
                       label: ''),
@@ -77,7 +77,7 @@ class _DashboardState extends State<Dashboard> {
                         AppImages.settings,
                         package: 'deposits_ecommerce',
                         color: controller.tabIndex.value == 3
-                            ? AppColors.activButtonColor
+                            ? AppColors.activButtonColor()
                             : AppColors.doveGray,
                       ),
                       label: ''),

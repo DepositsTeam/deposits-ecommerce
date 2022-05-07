@@ -173,7 +173,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 textStyle: const TextStyle(
                   color: AppColors.black,
                 ),
-                buttonColor: AppColors.activButtonColor,
+                buttonColor: AppColors.activButtonColor(),
               )),
           const CustomText(
             text: Strings.productId,

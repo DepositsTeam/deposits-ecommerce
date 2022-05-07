@@ -105,9 +105,9 @@ class _ShopDetailState extends State<ShopDetail>with WidgetsBindingObserver {
               minWidth: Get.width,
               addBorder: true,
               title: Strings.editShopDetails,
-              textColor: AppColors.borderButtonColor,
+              textColor: AppColors.borderButtonColor(),
               buttonColor: AppColors.declineColor,
-              loaderColor: AppColors.borderButtonColor,
+              loaderColor: AppColors.borderButtonColor(),
             ),
     );
   }

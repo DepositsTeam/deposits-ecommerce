@@ -106,9 +106,9 @@ class _ShippingPolicyState extends State<ShippingPolicy>with WidgetsBindingObser
               minWidth: Get.width,
               addBorder: true,
               title: Strings.editShippingReturnPolicy,
-              textColor: AppColors.borderButtonColor,
+              textColor: AppColors.borderButtonColor(),
               buttonColor: AppColors.declineColor,
-              loaderColor: AppColors.borderButtonColor,
+              loaderColor: AppColors.borderButtonColor(),
             ),
     );
   }

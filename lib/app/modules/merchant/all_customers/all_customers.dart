@@ -163,9 +163,9 @@ class _AllCustomersState extends State<AllCustomers>
         minWidth: Get.width,
         addBorder: true,
         title: Strings.createCustomer,
-        textColor: AppColors.borderButtonColor,
+        textColor: AppColors.borderButtonColor(),
         buttonColor: AppColors.white,
-        loaderColor: AppColors.borderButtonColor,
+        loaderColor: AppColors.borderButtonColor(),
       ),
     );
   }
