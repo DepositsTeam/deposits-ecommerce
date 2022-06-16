@@ -34,12 +34,11 @@ dependencies:
   uuid: ^3.0.6
   flutter_typeahead: ^3.2.4
   flutter_dotenv: ^5.0.2
-  deposits_oneclick_checkout: ^0.0.4
-  # deposits_oneclick_checkout:
-  #   git:
-  #     url: https://jeff208:Breadknyfe90@gitlab.com/yourex.io/mobile_apps/checkout/paywithdepositbutton.git
-  #     ref: dev
+  deposits_oneclick_checkout:
+    path: ../deposits-ecommerce/deposits-oneclick-checkout
   rxdart: ^0.27.3
+  deposits_store:
+    path: lib/store
 
 dev_dependencies:
   flutter_test:

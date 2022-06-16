@@ -157,7 +157,10 @@ class ShopItemDetailController extends GetxController {
     // print('customer email is : ${Storage.getValue(Constants.customerEmail)}');
     // print('oneclick api key is : ${ Constants.oneClickApiKey()}');
     CheckoutButton.depositsCheckout(
-        context, CheckoutButton.ButtonConfig(amount: amount),
+        context, CheckoutButton.ButtonConfig(
+          amount: amount,
+          buttonColor: '0DB9E9'
+          ),
         userEmail: Storage.getValue(Constants.customerEmail),
         apiKey: Constants.oneClickApiKey(),
         envMode: true, chargeFundsResponse: (response) {

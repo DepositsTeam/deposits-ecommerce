@@ -1,0 +1,3 @@
+[submodule "deposits-oneclick-checkout"]
+	path = deposits-oneclick-checkout
+	url = https://github.com/DepositsTeam/deposits-oneclick-checkout.git

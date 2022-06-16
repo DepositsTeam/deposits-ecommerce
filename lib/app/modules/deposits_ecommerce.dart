@@ -38,9 +38,10 @@ class DepositsEcommerceContext {
     await Utils.navigationPush(context, Dashboard(merchantID: "$merchantID"));
   }
 
-  Future showShop(BuildContext context, {required int? customerID}) async {
-     Storage.saveValue(Constants.customerID, customerID.toString());
-
+  Future showShop(BuildContext context,
+      {required int? customerID, required String? customerEmail}) async {
+    Storage.saveValue(Constants.customerID, customerID.toString());
+    Storage.saveValue(Constants.customerEmail, customerEmail);
     await Utils.navigationPush(
         context,
         Shops(
@@ -49,8 +50,10 @@ class DepositsEcommerceContext {
         ));
   }
 
-  Future showProduct(BuildContext context,  {required ProductData data, required int? customerID}) async {
+  Future showProduct(BuildContext context,
+      {required ProductData data, required int? customerID , required String? customerEmail}) async {
     await Storage.saveValue(Constants.customerID, customerID.toString());
+    await Storage.saveValue(Constants.customerEmail, customerEmail);
     await Utils.navigationPush(
         context,
         ShopItemDetail(
@@ -165,7 +168,7 @@ class _HorizontalShopContainerState extends State<HorizontalShopContainer>
               fontWeight: FontWeight.w600,
               color: AppColors.borderButtonColor2),
           subTitleOnTap: () {
-              Utils.navigationPush(context,
+            Utils.navigationPush(context,
                 Shops(customerId: widget.customerID, shopContext: shopContext));
             Storage.removeValue(Constants.merchantID);
             Storage.removeValue(Constants.customerID);
@@ -180,11 +183,10 @@ class _HorizontalShopContainerState extends State<HorizontalShopContainer>
         ),
         verticalSpaceMedium,
         ShopItems(
-          merchantID: widget.merchantId,
-          customerID: widget.customerID,
-          apiKey: widget.apiKey,
-          envMode: widget.envMode
-        ),
+            merchantID: widget.merchantId,
+            customerID: widget.customerID,
+            apiKey: widget.apiKey,
+            envMode: widget.envMode),
         // CustomSvgimage(image: AppImages.depositsLogo),
         verticalSpaceMedium,
       ],
@@ -264,7 +266,7 @@ class _ShopItemsState extends State<ShopItems> with WidgetsBindingObserver {
                         var item = controller.items[i];
                         return InkWell(
                           onTap: () {
-                             Utils.navigationPush(
+                            Utils.navigationPush(
                                 context,
                                 ShopItemDetail(
                                   data: item,
@@ -283,8 +285,6 @@ class _ShopItemsState extends State<ShopItems> with WidgetsBindingObserver {
                                 Constants.subClientApiKey, widget.apiKey);
                             Storage.saveValue(
                                 Constants.envMode, widget.envMode);
-
-                           
                           },
                           child: Container(
                             width: 170,
@@ -342,7 +342,7 @@ class DepositsApi {
   late String? sdkApiKey;
 
   /// Parameter, [apiKey] is the apiKey from the console for the host application.
-  final String  apiKey;
+  final String apiKey;
 
   final bool isProduction;
 
@@ -354,19 +354,23 @@ class DepositsApi {
   /// Useful if you are debuging or in development.
   late bool isDebug;
 
-  DepositsApi({required this.apiKey, required this.isProduction, this.isDebug = false}) {
+  DepositsApi(
+      {required this.apiKey,
+      required this.isProduction,
+      this.isDebug = false}) {
     // init function
     envLoaded = false;
     loadEnv();
   }
 
   loadEnv() async {
-    await dotenv.load(fileName: 'packages/deposits_ecommerce/lib/app/common/assets/.env');
+    await dotenv.load(
+        fileName: 'packages/deposits_ecommerce/lib/app/common/assets/.env');
     envLoaded = true;
   }
-  
+
   setBaseUrl() async {
-    if(envLoaded == false){
+    if (envLoaded == false) {
       await loadEnv();
     }
     if (isProduction == true) {
@@ -375,12 +379,12 @@ class DepositsApi {
       baseUrl = dotenv.env['baseUrlSandbox'].toString();
     }
   }
-  
+
   setSdkApiKey() async {
     if (isProduction == true) {
-      sdkApiKey= dotenv.env['sdkApiKeyLive'].toString();
+      sdkApiKey = dotenv.env['sdkApiKeyLive'].toString();
     } else {
-      sdkApiKey= dotenv.env['sdkApiKeySandbox'].toString();
+      sdkApiKey = dotenv.env['sdkApiKeySandbox'].toString();
     }
   }
 
@@ -398,18 +402,19 @@ class DepositsApi {
   }
 
   /// setup merchant
-  Future setupMerchant(depositUserId, name, description, supportEmail, category, zip, streetAddress, city, state, country) async {
+  Future setupMerchant(depositUserId, name, description, supportEmail, category,
+      zip, streetAddress, city, state, country) async {
     var data = {
-      'deposit_user_id' : depositUserId,
-      'name' : name,
-      'description' : description,
-      'support_email' : supportEmail,
-      'category' : category,
-      'zip' : zip,
-      'street_address' : streetAddress,
-      'city' : city,
-      'state' : state,
-      'country' : country,
+      'deposit_user_id': depositUserId,
+      'name': name,
+      'description': description,
+      'support_email': supportEmail,
+      'category': category,
+      'zip': zip,
+      'street_address': streetAddress,
+      'city': city,
+      'state': state,
+      'country': country,
     };
     var apiResponse = await post("/merchant/setup-merchant", data);
     return apiResponse;
@@ -417,44 +422,39 @@ class DepositsApi {
 
   /// get merchant
   Future getMerchant(id) async {
-    var data = {
-      'merchant_id': id
-    };
+    var data = {'merchant_id': id};
     var apiResponse = await post("/merchant", data);
     return apiResponse;
   }
 
   /// get merchant info
   Future getMerchantInfo(id) async {
-    var data = {
-      'merchant_id': id
-    };
+    var data = {'merchant_id': id};
     var apiResponse = await post("/merchant/get-info", data);
     return apiResponse;
   }
 
   /// get merchant info
   Future getSelectedMerchants(merchantIds) async {
-    var data = {
-      'merchant_ids': merchantIds
-    };
+    var data = {'merchant_ids': merchantIds};
     var apiResponse = await post("/merchant/selected", data);
     return apiResponse;
   }
 
   /// update merchant
-  Future updateMerchant(id, name, description, supportEmail, category, zip, streetAddress, city, state, country) async {
+  Future updateMerchant(id, name, description, supportEmail, category, zip,
+      streetAddress, city, state, country) async {
     var data = {
       'merchant_id': id,
-      'name' : name,
-      'description' : description,
-      'support_email' : supportEmail,
-      'category' : category,
-      'zip' : zip,
-      'street_address' : streetAddress,
-      'city' : city,
-      'state' : state,
-      'country' : country,
+      'name': name,
+      'description': description,
+      'support_email': supportEmail,
+      'category': category,
+      'zip': zip,
+      'street_address': streetAddress,
+      'city': city,
+      'state': state,
+      'country': country,
     };
     var apiResponse = await post("/merchant/update", data);
     return apiResponse;
@@ -467,23 +467,26 @@ class DepositsApi {
       'return_policy': returnPolicy,
       'shipping_policy': shippingPolicy,
     };
-    var apiResponse = await post("/merchant/update-merchant-shipping-and-return-policy", data);
+    var apiResponse = await post(
+        "/merchant/update-merchant-shipping-and-return-policy", data);
     return apiResponse;
   }
 
   /// update merchant contact info
-  Future updateMerchantContactInfo(id,contactInfo, contactAddress) async {
+  Future updateMerchantContactInfo(id, contactInfo, contactAddress) async {
     var data = {
       'merchant_id': id,
       'contact_info': contactInfo,
       'contact_address': contactAddress,
     };
-    var apiResponse = await post("/merchant/update-merchant-contact-and-address", data);
+    var apiResponse =
+        await post("/merchant/update-merchant-contact-and-address", data);
     return apiResponse;
   }
 
   /// update merchant shipping and tax info
-  Future updateMerchantShippingAndTaxInfo(id, taxId, taxPercent, shippingFee) async {
+  Future updateMerchantShippingAndTaxInfo(
+      id, taxId, taxPercent, shippingFee) async {
     var data = {
       'merchant_id': id,
       'tax_id': taxId,
@@ -496,36 +499,34 @@ class DepositsApi {
 
   /// get merchant
   Future deleteMerchant(id) async {
-    var data = {
-      'merchant_id': id
-    };
+    var data = {'merchant_id': id};
     var apiResponse = await post("/merchant/delete-merchant", data);
     return apiResponse;
   }
 
-
   /// createProduct
-  Future createProduct(merchantId,sku,name,price,description,quantity,includeFeesTax,type,tax,shippingFee,assetIds,meta) async {
+  Future createProduct(merchantId, sku, name, price, description, quantity,
+      includeFeesTax, type, tax, shippingFee, assetIds, meta) async {
     var data = {
       'merchant_id': merchantId,
       'sku': sku,
-      "name":name,
-      "price":price,
-      "description":description,
-      "quantity":quantity,
-      "include_fees_tax":includeFeesTax,
-      "type":type,
-      "tax":tax,
-      "shipping_fee":shippingFee,
-      "asset_ids":assetIds,
-      "meta":meta
+      "name": name,
+      "price": price,
+      "description": description,
+      "quantity": quantity,
+      "include_fees_tax": includeFeesTax,
+      "type": type,
+      "tax": tax,
+      "shipping_fee": shippingFee,
+      "asset_ids": assetIds,
+      "meta": meta
     };
     var apiResponse = await post("/merchant/products/create", data);
     return apiResponse;
   }
 
   /// createAsset
-  Future createAsset(merchantId,file,name,description) async {
+  Future createAsset(merchantId, file, name, description) async {
     var data = {
       'merchant_id': merchantId,
       'file': file,
@@ -539,7 +540,8 @@ class DepositsApi {
   // Customers
 
   /// createCustomer
-  Future createCustomer(merchantId,email,firstName,lastName,gender,phoneNumber,meta) async {
+  Future createCustomer(
+      merchantId, email, firstName, lastName, gender, phoneNumber, meta) async {
     var data = {
       'merchant_id': merchantId,
       'email': email,
@@ -554,7 +556,8 @@ class DepositsApi {
   }
 
   /// findCustomerOrCreate
-  Future findCustomerOrCreate(merchantId,email,firstName,lastName,gender,phoneNumber,meta) async {
+  Future findCustomerOrCreate(
+      merchantId, email, firstName, lastName, gender, phoneNumber, meta) async {
     var data = {
       'merchant_id': merchantId,
       'email': email,
@@ -569,7 +572,7 @@ class DepositsApi {
   }
 
   /// findCustomer
-  Future findCustomer(merchantId,email) async {
+  Future findCustomer(merchantId, email) async {
     var data = {
       'merchant_id': merchantId,
       'email': email,
@@ -577,7 +580,7 @@ class DepositsApi {
     var apiResponse = await post("/customer/find", data);
     return apiResponse;
   }
-  
+
   /// getProducts
   Future getProducts(merchantId) async {
     var data = {
@@ -588,7 +591,7 @@ class DepositsApi {
   }
 
   /// getProducts
-  Future getProduct(merchantId,productId) async {
+  Future getProduct(merchantId, productId) async {
     var data = {
       'merchant_id': merchantId,
     };
@@ -606,7 +609,22 @@ class DepositsApi {
   }
 
   /// createOrder
-  Future createOrder(merchantId,customerId,shippingFee,tax,transactionId,zip,streetAddress,city,state,country,saveAddress,isDefaultAddress,productIds,quantityList,meta) async {
+  Future createOrder(
+      merchantId,
+      customerId,
+      shippingFee,
+      tax,
+      transactionId,
+      zip,
+      streetAddress,
+      city,
+      state,
+      country,
+      saveAddress,
+      isDefaultAddress,
+      productIds,
+      quantityList,
+      meta) async {
     var data = {
       'merchant_id': merchantId,
       'customer_id': customerId,
@@ -638,18 +656,18 @@ class DepositsApi {
   }
 
   /// Make a custom post request to DepositsApi, using DepositsApi SDK.
-  Future<dynamic> post( String endPoint, Map data) async {
+  Future<dynamic> post(String endPoint, Map data) async {
     await setBaseUrl();
     await setSdkApiKey();
-    
+
     var url = "$baseUrl$endPoint";
     var httpResponse = await httpRequest("POST", url, data);
     return httpResponse;
   }
 
-  httpRequest(type,url,data) async {
+  httpRequest(type, url, data) async {
     // ignore: prefer_typing_uninitialized_variables
-    var response,httpResponse;
+    var response, httpResponse;
     try {
       type = type.toString().toLowerCase();
       var headers = {
@@ -658,44 +676,58 @@ class DepositsApi {
       };
       data['api_key'] = sdkApiKey;
       data['sub_client_api_key'] = apiKey;
-      HttpClient client = HttpClient()..badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+      HttpClient client = HttpClient()
+        ..badCertificateCallback =
+            ((X509Certificate cert, String host, int port) => true);
       var ioClient = IOClient(client);
 
-      if(type == 'get'){
-        httpResponse = await ioClient.get(Uri.parse(url),headers: headers);
-      }else if(type == 'delete'){
-        httpResponse = await ioClient.delete(Uri.parse(url), body: json.encode(data),headers: headers);
-      }else if(type == 'patch'){
-        httpResponse = await ioClient.patch(Uri.parse(url), body: json.encode(data),headers: headers);
-      }else{
-        httpResponse = await ioClient.post(Uri.parse(url), body: json.encode(data),headers: headers);
+      if (type == 'get') {
+        httpResponse = await ioClient.get(Uri.parse(url), headers: headers);
+      } else if (type == 'delete') {
+        httpResponse = await ioClient.delete(Uri.parse(url),
+            body: json.encode(data), headers: headers);
+      } else if (type == 'patch') {
+        httpResponse = await ioClient.patch(Uri.parse(url),
+            body: json.encode(data), headers: headers);
+      } else {
+        httpResponse = await ioClient.post(Uri.parse(url),
+            body: json.encode(data), headers: headers);
       }
       _printToLog("$url");
       _printToLog("$data");
-      if(httpResponse.statusCode == 200){
+      if (httpResponse.statusCode == 200) {
         //
         response = json.decode(httpResponse.body);
-      }else{
-        response = {'status':'error','message':'${httpResponse.statusCode} error $url ${httpResponse.body}'};
+      } else {
+        response = {
+          'status': 'error',
+          'message':
+              '${httpResponse.statusCode} error $url ${httpResponse.body}'
+        };
       }
-      if(response['message'].toString().contains('SocketException: OS Error')){
+      if (response['message']
+          .toString()
+          .contains('SocketException: OS Error')) {
         response['message'] = 'Network Error';
       }
-      if(response['message'].toString().contains('No address associated with hostname')){
+      if (response['message']
+          .toString()
+          .contains('No address associated with hostname')) {
         response['message'] = 'Connection Error';
       }
     } catch (error) {
       _printToLog("$error");
-      var response = {'status':'error','message':'Error: $error $url'};
-      if(response['message'].toString().contains('SocketException')){
+      var response = {'status': 'error', 'message': 'Error: $error $url'};
+      if (response['message'].toString().contains('SocketException')) {
         response['message'] = 'Network Error';
       }
-      if(response['message'].toString().contains('No address associated with hostname')){
+      if (response['message']
+          .toString()
+          .contains('No address associated with hostname')) {
         response['message'] = 'Connection Error';
       }
     }
     _printToLog("$response");
     return response;
   }
-
 }
