@@ -25,6 +25,26 @@ class _ShopItemDetailState extends State<ShopItemDetail>
     WidgetsBinding.instance?.addObserver(this);
     super.initState();
     controller.fetchAddress(context);
+    controller.streetAddressController.text = '';
+    controller.zipCodeController.text = '';
+    controller.country.text = '';
+    controller.state.text = '';
+    controller.city.text = '';
+    controller.streetAddressController.addListener(() {
+      if (mounted) setState(() {});
+    });
+    controller.zipCodeController.addListener(() {
+     if (mounted) setState(() {});
+    });
+    controller.country.addListener(() {
+      if (mounted) setState(() {});
+    });
+    controller.state.addListener(() {
+      if (mounted) setState(() {});
+    });
+    controller.city.addListener(() {
+      if (mounted) setState(() {});
+    });
   }
 
   @override
@@ -344,13 +364,21 @@ class _ShopItemDetailState extends State<ShopItemDetail>
 
 //------------------------------------------------
   Widget checkDefault() {
-    return CustomCheckboxWidget(
-        value: false,
-        titleWidget: const CustomText(
-          text: 'Save this address for later',
-          font: Dimens.fontSize14,
-          fntweight: FontWeight.w400,
-          txtColor: AppColors.doveGray,
+    return Obx(() => CheckboxListTile(
+          value: controller.isSaveForLater.value,
+          activeColor: AppColors.green,
+          checkColor: AppColors.white,
+          contentPadding: EdgeInsets.zero,
+          controlAffinity: ListTileControlAffinity.leading,
+          title: const CustomText(
+            text: Strings.saveAddressLater,
+            font: Dimens.fontSize14,
+            fntweight: FontWeight.w400,
+            txtColor: AppColors.doveGray,
+          ),
+          onChanged: (value) {
+            controller.toggleIsSaveForLaters(value!);
+          },
         ));
   }
 

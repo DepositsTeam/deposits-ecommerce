@@ -37,8 +37,8 @@ dependencies:
   deposits_oneclick_checkout:
     path: ../deposits-ecommerce/deposits-oneclick-checkout
   rxdart: ^0.27.3
-  deposits_store:
-    path: lib/store
+  # deposits_store:
+  #   path: lib/store
 
 dev_dependencies:
   flutter_test:

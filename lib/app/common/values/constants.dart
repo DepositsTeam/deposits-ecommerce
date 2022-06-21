@@ -29,8 +29,8 @@ class Constants {
     return key;
   }
 
-  static String oneClickApiKey()  {
-    bool isDev =  Utils.getEnviromentMode();
+  static String oneClickApiKey() {
+    bool isDev = Utils.getEnviromentMode();
     print("isDev $isDev");
     var key = '';
     if (isDev) {
@@ -40,6 +40,31 @@ class Constants {
     }
     print("one click api key $key");
     return key;
+  }
+
+  static String orderApiKey() {
+    bool isDev = Utils.getEnviromentMode();
+    // print("isDev $isDev");
+    var key = '';
+    if (isDev) {
+      key = dotenv.env['sdkApiKeySandbox'].toString();
+    } else {
+      key = dotenv.env['sdkApiKeyLive'].toString();
+    }
+    // print("api key $key");
+    return key;
+  }
+
+  static String orderBaseUrl() {
+    bool isDev = Utils.getEnviromentMode();
+    var url = '';
+    if (isDev) {
+      url = dotenv.env['baseUrlSandbox'].toString();
+    } else {
+      url = dotenv.env['baseUrlLive'].toString();
+    }
+    // print('URL $url - $isDev');
+    return url;
   }
 
   static const String noAssetImageAvailable =
