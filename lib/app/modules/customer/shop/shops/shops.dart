@@ -33,13 +33,13 @@ class Shops extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 actions: [
-                  Padding(
-                      padding: const EdgeInsets.only(right: 16.0),
-                      child: CustomInkwellWidget(
-                          onTap: () {
-                            filterItem(context);
-                          },
-                          child: CustomSvgimage(image: AppImages.filter))),
+                  // Padding(
+                  //     padding: const EdgeInsets.only(right: 16.0),
+                  //     child: CustomInkwellWidget(
+                  //         onTap: () {
+                  //           filterItem(context);
+                  //         },
+                  //         child: CustomSvgimage(image: AppImages.filter))),
                   Padding(
                       padding: const EdgeInsets.only(right: 16.0),
                       child: CustomInkwellWidget(
