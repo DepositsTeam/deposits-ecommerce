@@ -24,7 +24,7 @@ class CustomAppbarWidget extends PreferredSize {
     this.addCloseButton = true,
     this.onBackPress,
     this.onClosePress,
-    this.backgroundColor = AppColors.activButtonColor,
+    this.backgroundColor,
     this.backbuttonColor = AppColors.white,
     this.closeButtonColor = AppColors.white,
     this.textColor,

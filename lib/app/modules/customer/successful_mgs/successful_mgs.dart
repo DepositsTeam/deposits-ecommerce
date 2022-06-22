@@ -84,7 +84,7 @@ class _SuccessfulMgsState extends State<SuccessfulMgs> {
           minWidth: Get.width,
           title: Strings.done,
           textStyle: const TextStyle(color: AppColors.black),
-          buttonColor: AppColors.activButtonColor,
+          buttonColor: AppColors.activButtonColor(),
         ),
         verticalSpaceSmall,
         Container(

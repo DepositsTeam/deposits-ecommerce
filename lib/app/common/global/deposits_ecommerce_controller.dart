@@ -22,16 +22,20 @@ class DepositEcommerceController extends GetxController {
           api: '/customer/products/featured',
           method: Method.POST,
           params: request);
-
-      GetProductsResponse getProductsResponse =
-          GetProductsResponse.fromJson(response);
-      if (getProductsResponse.status == Strings.success) {
-        items.addAll(getProductsResponse.data!.obs);
-      } else {
+      if (response != null) {
+        GetProductsResponse getProductsResponse =
+            GetProductsResponse.fromJson(response);
+        if (getProductsResponse.status == Strings.success) {
+          items.addAll(getProductsResponse.data!.obs);
+        } else {
+          isError(true);
+          errorMessage.value = response['message'].toString().toTitleCase();
+          return Utils.showSnackbar(context, Strings.error,
+              response['message'].toString().toTitleCase(), AppColors.red);
+        }
+      }else{
         isError(true);
-        errorMessage.value = response['message'].toString().toTitleCase();
-        return Utils.showSnackbar(context, Strings.error,
-            response['message'].toString().toTitleCase(), AppColors.red);
+        errorMessage.value = 'Connection timeout with API server';
       }
     } finally {
       isLoading(false);
@@ -54,18 +58,22 @@ class DepositEcommerceController extends GetxController {
           api: '/merchant/customers/$customerId',
           method: Method.POST,
           params: request);
-
-      GetCustomerResponse getCustomerResponse =
-          GetCustomerResponse.fromJson(response);
-      if (getCustomerResponse.status == Strings.success) {
-        Storage.removeValue(Constants.customerEmail);
-        Storage.saveValue(
-            Constants.customerEmail, getCustomerResponse.data!.email);
-      } else {
+      if (response != null) {
+        GetCustomerResponse getCustomerResponse =
+            GetCustomerResponse.fromJson(response);
+        if (getCustomerResponse.status == Strings.success) {
+          Storage.removeValue(Constants.customerEmail);
+          Storage.saveValue(
+              Constants.customerEmail, getCustomerResponse.data!.email);
+        } else {
+          isError(true);
+          errorMessage.value = response['message'].toString().toTitleCase();
+          return Utils.showSnackbar(context, Strings.error,
+              response['message'].toString().toTitleCase(), AppColors.red);
+        }
+      }else{
         isError(true);
-        errorMessage.value = response['message'].toString().toTitleCase();
-        return Utils.showSnackbar(context, Strings.error,
-            response['message'].toString().toTitleCase(), AppColors.red);
+        errorMessage.value = 'Connection timeout with API server';
       }
     } finally {
       // isLoading(false);

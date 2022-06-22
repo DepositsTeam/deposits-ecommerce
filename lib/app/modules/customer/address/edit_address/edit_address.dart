@@ -213,8 +213,8 @@ class _EditAddressState extends State<EditAddress> {
                         ? AppColors.black
                         : AppColors.white),
                 buttonColor: controller.validateInput()
-                    ? AppColors.activButtonColor
-                    : AppColors.inActivButtonColor,
+                    ? AppColors.activButtonColor()
+                    : AppColors.inActivButtonColor(),
               ),
             ),
             horizontalSpaceSmall,
@@ -226,7 +226,7 @@ class _EditAddressState extends State<EditAddress> {
               minWidth: Get.width,
               addBorder: true,
               title: Strings.delete,
-              textColor: AppColors.borderButtonColor,
+              textColor: AppColors.borderButtonColor(),
               buttonColor: AppColors.white,
             ))
           ],

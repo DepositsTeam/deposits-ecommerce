@@ -83,6 +83,8 @@ Widget depositsMerchantWidget(
   HttpOverrides.global = MyHttpOverrides();
   GetStorage.init();
   Utils.loadEnvFile();
+  Storage.removeValue(Constants.customColor);
+  Storage.saveValue(Constants.customColor, buttonConfig.buttonColor);
   return ShopButton(
     context: context,
     buttonConfig: buttonConfig,
@@ -98,10 +100,13 @@ Widget depositsCustomerWidget(
   required String merchantId,
   required String customerID,
   required String apiKey,
+  required String customColor,
   required bool envMode,
 }) {
   GetStorage.init();
   Utils.loadEnvFile();
+  Storage.removeValue(Constants.customColor);
+  Storage.saveValue(Constants.customColor, customColor);
   return HorizontalShopContainer(
     context: context,
     envMode: envMode,
@@ -163,10 +168,10 @@ class _HorizontalShopContainerState extends State<HorizontalShopContainer>
               color: AppColors.black),
           titleOnTap: () {},
           subtitle: Strings.seeAll,
-          subtitleStyle: const TextStyle(
+          subtitleStyle:  TextStyle(
               fontSize: Dimens.fontSize16,
               fontWeight: FontWeight.w600,
-              color: AppColors.borderButtonColor2),
+              color: AppColors.borderButtonColor2()),
           subTitleOnTap: () {
             Utils.navigationPush(context,
                 Shops(customerId: widget.customerID, shopContext: shopContext));
@@ -254,6 +259,8 @@ class _ShopItemsState extends State<ShopItems> with WidgetsBindingObserver {
                       onPressed: () {
                         controller.fetchProducts(context, widget.apiKey,
                             widget.merchantID, widget.customerID);
+                        controller.getCustumerDetails(
+                            context, widget.merchantID, widget.customerID);
                       },
                       title: Strings.error,
                     )

@@ -12,20 +12,20 @@ class Constants {
     } else {
       url = dotenv.env['baseUrlLive'].toString();
     }
-    print('URL $url - $isDev');
+    // print('URL $url - $isDev');
     return url;
   }
 
   static Future<String> apiKey() async {
     bool isDev = await Utils.getEnviromentMode();
-    print("isDev $isDev");
+    // print("isDev $isDev");
     var key = '';
     if (isDev) {
       key = dotenv.env['sdkApiKeySandbox'].toString();
     } else {
       key = dotenv.env['sdkApiKeyLive'].toString();
     }
-    print("api key $key");
+    // print("api key $key");
     return key;
   }
 
@@ -38,7 +38,7 @@ class Constants {
     } else {
       key = dotenv.env['sdkApiKeyLive'].toString();
     }
-    print("one click api key $key");
+    // print("one click api key $key");
     return key;
   }
 
@@ -75,6 +75,6 @@ class Constants {
   static const String envMode = 'envMode';
   static const String merchantID = 'merchantId';
   static const String customerID = 'customerID';
-
+  static const String customColor = 'custom_color';
   static const String customerEmail = 'customer_mail';
 }

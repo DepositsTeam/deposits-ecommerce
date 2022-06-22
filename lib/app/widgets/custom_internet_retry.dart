@@ -20,6 +20,8 @@ class CustomNoInternetRetry extends StatelessWidget{
               SizedBox(
                 width: 100,
                 child: CustomElevatedButton(
+                  buttonColor: AppColors.activButtonColor(),
+                  textColor: Colors.white,
                   onPressed: onPressed,title: Strings.retry,))
             ],)
         );

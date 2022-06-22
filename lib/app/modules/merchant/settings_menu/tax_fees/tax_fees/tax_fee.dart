@@ -104,9 +104,9 @@ class _TaxFeeState extends State<TaxFee> with WidgetsBindingObserver {
               minWidth: Get.width,
               addBorder: true,
               title: Strings.editTaxFee,
-              textColor: AppColors.borderButtonColor,
+              textColor: AppColors.borderButtonColor(),
               buttonColor: AppColors.declineColor,
-              loaderColor: AppColors.borderButtonColor,
+              loaderColor: AppColors.borderButtonColor(),
             ),
     );
   }

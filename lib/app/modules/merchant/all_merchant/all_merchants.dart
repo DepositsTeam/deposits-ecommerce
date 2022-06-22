@@ -160,9 +160,9 @@ class _AllMerchantsState extends State<AllMerchants>
         minWidth: Get.width,
         addBorder: true,
         title: Strings.setUpShop,
-        textColor: AppColors.borderButtonColor,
+        textColor: AppColors.borderButtonColor(),
         buttonColor: AppColors.white,
-        loaderColor: AppColors.borderButtonColor,
+        loaderColor: AppColors.borderButtonColor(),
       ),
     );
   }

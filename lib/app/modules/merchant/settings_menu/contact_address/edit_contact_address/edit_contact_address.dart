@@ -144,8 +144,8 @@ class _EditContactAddressState extends State<EditContactAddress> {
                   ? AppColors.black
                   : AppColors.white),
           buttonColor: controller.validateInput()
-              ? AppColors.activButtonColor
-              : AppColors.inActivButtonColor,
+              ? AppColors.activButtonColor()
+              : AppColors.inActivButtonColor(),
         )));
   }
 //-------------------------------------------------------

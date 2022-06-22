@@ -52,18 +52,22 @@ class ShopsController extends GetxController {
           api: '/merchant/products/get',
           method: Method.POST,
           params: request);
-
-      GetProductsResponse getProductsResponse =
-          GetProductsResponse.fromJson(response);
-      if (getProductsResponse.status == Strings.success) {
-        tempItems.addAll(getProductsResponse.data!.obs);
-        items.addAll(tempItems);
-        totalResults = items.length.obs;
-      } else {
+      if (response != null) {
+        GetProductsResponse getProductsResponse =
+            GetProductsResponse.fromJson(response);
+        if (getProductsResponse.status == Strings.success) {
+          tempItems.addAll(getProductsResponse.data!.obs);
+          items.addAll(tempItems);
+          totalResults = items.length.obs;
+        } else {
+          isError(true);
+          errorMessage.value = response['message'].toString().toTitleCase();
+          return Utils.showSnackbar(context, Strings.error,
+              response['message'].toString().toTitleCase(), AppColors.red);
+        }
+      }else{
         isError(true);
-        errorMessage.value = response['message'].toString().toTitleCase();
-        return Utils.showSnackbar(context, Strings.error,
-            response['message'].toString().toTitleCase(), AppColors.red);
+        errorMessage.value = 'Connection timeout with API server';
       }
     } finally {
       isLoading(true);
@@ -85,7 +89,7 @@ class ShopsController extends GetxController {
           api: '/merchant/get-info',
           method: Method.POST,
           params: request);
-
+       if(response != null){
       GetSingleMerchantResponse merchantResponse =
           GetSingleMerchantResponse.fromJson(response);
       if (merchantResponse.status == Strings.success) {
@@ -94,8 +98,11 @@ class ShopsController extends GetxController {
         return Utils.showSnackbar(context, Strings.error,
             response['message'].toString().toTitleCase(), AppColors.red);
       }
+    }else{
+      isError(true);
+        errorMessage.value = 'Connection timeout with API server';
+    }
     } catch (e) {
-      print("Merchant Error $e");
       return Utils.showSnackbar(
           context, Strings.error, e.toString().toTitleCase(), AppColors.red);
     } finally {

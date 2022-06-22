@@ -97,8 +97,8 @@ class _DeleteAccountState extends State<DeleteAccount> {
                   ? AppColors.black
                   : AppColors.white),
           buttonColor: controller.isDeleteShop.isTrue
-              ? AppColors.activButtonColor
-              : AppColors.inActivButtonColor,
+              ? AppColors.activButtonColor()
+              : AppColors.inActivButtonColor(),
         )));
   }
 

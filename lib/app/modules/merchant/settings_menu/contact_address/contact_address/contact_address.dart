@@ -109,9 +109,9 @@ class _ContactAddressState extends State<ContactAddress>with WidgetsBindingObser
         minWidth: Get.width,
         addBorder: true,
         title: Strings.editContactAddress,
-        textColor: AppColors.borderButtonColor,
+        textColor: AppColors.borderButtonColor(),
         buttonColor: AppColors.declineColor,
-        loaderColor: AppColors.borderButtonColor,
+        loaderColor: AppColors.borderButtonColor(),
       ),
     );
   }

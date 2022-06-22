@@ -122,7 +122,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> with WidgetsBindingOb
       minWidth: Get.width,
       addBorder: true,
       title: Strings.addDeliveryAddress,
-      textColor: AppColors.borderButtonColor,
+      textColor: AppColors.borderButtonColor(),
       buttonColor: AppColors.white,
     );
   }

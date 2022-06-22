@@ -60,10 +60,11 @@ class _ShopButtonButtonState extends State<ShopButton> {
                 (states) => RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(2),
                   side: BorderSide(
-                    color: widget.buttonConfig.buttonColor ==
-                            AppColors.activButtonColor
+                    color: Color(Utils.hexToInt(
+                                widget.buttonConfig.buttonColor)) ==
+                            AppColors.activButtonColor()
                         ? Colors.white
-                        : widget.buttonConfig.buttonBorderColor,
+                        : widget.buttonConfig.buttonBorderColor!,
                     width: 2,
                   ),
                 ),
@@ -85,11 +86,13 @@ class _ShopButtonButtonState extends State<ShopButton> {
         backgroundColor: MaterialStateProperty.resolveWith<Color>(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
-              return widget.buttonConfig.buttonColor.withOpacity(.50);
+              return Color(Utils.hexToInt(widget.buttonConfig.buttonColor))
+                  .withOpacity(.50);
             }
             return !widget.buttonConfig.isBusy
-                ? widget.buttonConfig.buttonColor
-                : widget.buttonConfig.buttonColor.withOpacity(0.6);
+                ? Color(Utils.hexToInt(widget.buttonConfig.buttonColor))
+                : Color(Utils.hexToInt(widget.buttonConfig.buttonColor))
+                    .withOpacity(0.6);
           },
         ),
       ),
@@ -103,14 +106,7 @@ class _ShopButtonButtonState extends State<ShopButton> {
                     style: widget.buttonConfig.textStyle ??
                         AppTextStyle.boldStyle.copyWith(
                           fontSize: Dimens.fontSize14,
-                          color:
-                              widget.buttonConfig.buttonColor == Colors.white ||
-                                      widget.buttonConfig.buttonColor ==
-                                          Colors.transparent ||
-                                      widget.buttonConfig.buttonColor ==
-                                          AppColors.declineColor
-                                  ? widget.buttonConfig.textColor
-                                  : Colors.white,
+                          color: widget.buttonConfig.textColor
                         ),
                   ),
                 ],

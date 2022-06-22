@@ -1,6 +1,6 @@
 import 'package:deposits_ecommerce/app/common/utils/exports.dart';
 class ShopSettings extends StatefulWidget {
-  ShopSettings({Key? key}) : super(key: key);
+  const ShopSettings({Key? key}) : super(key: key);
 
   @override
   State<ShopSettings> createState() => _ShopSettingsState();
@@ -72,7 +72,7 @@ class _ShopSettingsState extends State<ShopSettings> {
     return Column(
       children: [
         CustomListTileWidget(
-          leading: CustomSvgimage(image: AppImages.shopDetails),
+          leading: CustomSvgimage(image: AppImages.shopDetails,color:AppColors.activButtonColor()),
           title: Strings.shopDetails,
           onTap: () {
             Utils.navigationPush(
@@ -91,7 +91,7 @@ class _ShopSettingsState extends State<ShopSettings> {
           height: 1,
         ),
         CustomListTileWidget(
-          leading: CustomSvgimage(image: AppImages.taxes),
+          leading: CustomSvgimage(image: AppImages.taxes, color: AppColors.activButtonColor()),
           title: Strings.taxFees,
           onTap: () {
             Utils.navigationPush(
@@ -111,7 +111,7 @@ class _ShopSettingsState extends State<ShopSettings> {
           height: 1,
         ),
         CustomListTileWidget(
-          leading: CustomSvgimage(image: AppImages.viewStore),
+          leading: CustomSvgimage(image: AppImages.viewStore, color: AppColors.activButtonColor()),
           title: 'View store as a user',
           onTap: () {
             Utils.navigationPush(
@@ -130,7 +130,7 @@ class _ShopSettingsState extends State<ShopSettings> {
           height: 1,
         ),
         CustomListTileWidget(
-          leading: CustomSvgimage(image: AppImages.shipping),
+          leading: CustomSvgimage(image: AppImages.shipping, color: AppColors.activButtonColor()),
           title: Strings.shippingReturnPolicy,
           onTap: () {
             Utils.navigationPush(
@@ -149,7 +149,8 @@ class _ShopSettingsState extends State<ShopSettings> {
           height: 1,
         ),
         CustomListTileWidget(
-          leading: CustomSvgimage(image: AppImages.contactAddress),
+          leading: CustomSvgimage(image: AppImages.contactAddress,
+              color: AppColors.activButtonColor()),
           title: Strings.contactAddress,
           onTap: () {
             Utils.navigationPush(
@@ -168,7 +169,7 @@ class _ShopSettingsState extends State<ShopSettings> {
           height: 1,
         ),
         CustomListTileWidget(
-          leading: CustomSvgimage(image: AppImages.support),
+          leading: CustomSvgimage(image: AppImages.support, color: AppColors.activButtonColor()),
           title: Strings.support,
           onTap: () {
             Utils.navigationPush(
@@ -187,7 +188,7 @@ class _ShopSettingsState extends State<ShopSettings> {
           height: 1,
         ),
         CustomListTileWidget(
-          leading: CustomSvgimage(image: AppImages.deleteShop),
+          leading: CustomSvgimage(image: AppImages.deleteShop, color: AppColors.activButtonColor()),
           title: Strings.deleteMyShop,
           onTap: () {
             Utils.navigationReplace(

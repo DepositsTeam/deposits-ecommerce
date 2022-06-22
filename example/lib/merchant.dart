@@ -14,6 +14,8 @@ class _MerchantFlowState extends State<MerchantFlow> {
   bool isSwitched = false;
   var envMode = false;
   var apiKey = dotenv.env['apiKeyLive']!;
+  int id = 1;
+  String radioSelectedColor = 'FF0DB9E9';
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class _MerchantFlowState extends State<MerchantFlow> {
                 'E-commerce SDK Test (Merchant Flow).',
                 style: TextStyle(fontSize:18, fontWeight: FontWeight.w700 ),
               ),
-                 Container(
+              Container(
                   margin: const EdgeInsets.only(top: (10.0)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,10 +68,87 @@ class _MerchantFlowState extends State<MerchantFlow> {
                     ],
                   ),
                 ),
+              Container(
+                margin: const EdgeInsets.only(top: (15.0)),
+                child: const Text(
+                  'SELECT CUSTOMIZATION COLOR',
+                  style: TextStyle(color: Colors.black, fontSize: 16),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: (2.0)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Radio(
+                          value: 1,
+                          groupValue: id,
+                          activeColor: Color(int.parse("0xFF0DB9E9")),
+                          onChanged: (val) {
+                            setState(() {
+                              radioSelectedColor = 'FF0DB9E9';
+                              id = 1;
+                            });
+                          },
+                        ),
+                        const Text(
+                          'BLUE',
+                          style: TextStyle(fontSize: 17.0),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Radio(
+                          value: 2,
+                          groupValue: id,
+                          activeColor: Colors.purple,
+                          onChanged: (val) {
+                            setState(() {
+                              radioSelectedColor = 'FFA020F0';
+                              id = 2;
+                            });
+                          },
+                        ),
+                        const Text(
+                          'PURPLE',
+                          style: TextStyle(
+                            fontSize: 17.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Radio(
+                          value: 3,
+                          groupValue: id,
+                          activeColor: Colors.red,
+                          onChanged: (val) {
+                            setState(() {
+                              radioSelectedColor = 'FFFF0000';
+                              id = 3;
+                            });
+                          },
+                        ),
+                        const Text(
+                          'RED',
+                          style: TextStyle(fontSize: 17.0),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
               const SizedBox(height: 30,),
               depositsMerchantWidget(
                 context,
-                const ButtonConfig(buttonText: 'Shop',textStyle: TextStyle(color: Colors.black),
+                 ButtonConfig(
+                  buttonText: 'Shop',
+                  buttonColor: radioSelectedColor,
+                  textColor: Colors.black
                 ),
               merchantID: '',
               apiKey: apiKey,

@@ -357,8 +357,8 @@ class _ShopItemDetailState extends State<ShopItemDetail>
                   : AppColors.white),
           buttonColor:
               (controller.validateInput() || controller.addresses.isNotEmpty)
-                  ? AppColors.activButtonColor
-                  : AppColors.inActivButtonColor,
+                  ? AppColors.activButtonColor()
+                  : AppColors.inActivButtonColor(),
         )));
   }
 

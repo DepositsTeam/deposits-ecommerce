@@ -6,7 +6,9 @@ class ButtonConfig {
   final TextStyle? textStyle;
   final double height, minWidth;
   final Widget? titleWidget;
-  final Color buttonColor, buttonBorderColor, textColor, loaderColor;
+  final Color? buttonBorderColor;
+  final String buttonColor;
+  final Color  textColor, loaderColor;
   final bool addBorder;
   final bool isBusy;
 
@@ -15,8 +17,8 @@ class ButtonConfig {
     this.textStyle,
     this.height = 55,
     this.minWidth = 100,
-    this.buttonColor = AppColors.activButtonColor,
-    this.buttonBorderColor = AppColors.borderButtonColor,
+    required this.buttonColor,
+    this.buttonBorderColor ,
     this.textColor = AppColors.black,
     this.loaderColor = AppColors.white,
     this.titleWidget,

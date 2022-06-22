@@ -312,8 +312,8 @@ class Shops extends StatelessWidget {
                               minWidth: Get.width,
                               title: Strings.filter,
                               isBusy: controller.isLoading.value,
-                              textStyle: TextStyle(color: AppColors.black),
-                              buttonColor: AppColors.activButtonColor,
+                              textStyle: const TextStyle(color: AppColors.black),
+                              buttonColor: AppColors.activButtonColor(),
                             )))
                       ],
                     )));

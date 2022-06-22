@@ -129,7 +129,7 @@ class _ProductsState extends State<Products> with WidgetsBindingObserver {
                               title: Strings.addProduct,
                               textStyle:
                                   const TextStyle(color: AppColors.black),
-                              buttonColor: AppColors.activButtonColor,
+                              buttonColor: AppColors.activButtonColor(),
                             ),
                           )
                         ]))
@@ -201,7 +201,7 @@ class _ProductsState extends State<Products> with WidgetsBindingObserver {
                                     title: Strings.addProduct,
                                     textStyle:
                                         const TextStyle(color: AppColors.black),
-                                    buttonColor: AppColors.activButtonColor,
+                                    buttonColor: AppColors.activButtonColor(),
                                   ),
                                 )
                               ])

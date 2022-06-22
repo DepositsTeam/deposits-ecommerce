@@ -36,7 +36,7 @@ class CustomRichTextWidget extends StatelessWidget {
             recognizer: TapGestureRecognizer()..onTap = onSubtitleTap2,
             text: ' $title2',
             style: AppTextStyle.regularStyle.copyWith(
-                fontSize: Dimens.fontSize14, color: AppColors.activButtonColor),
+                fontSize: Dimens.fontSize14, color: AppColors.activButtonColor()),
           ),
           TextSpan(
               text: ' $title3 ',
@@ -48,7 +48,7 @@ class CustomRichTextWidget extends StatelessWidget {
             recognizer: TapGestureRecognizer()..onTap = onSubtitleTap4,
             text: '$title4 ',
             style: AppTextStyle.regularStyle.copyWith(
-                fontSize: Dimens.fontSize14, color: AppColors.activButtonColor),
+                fontSize: Dimens.fontSize14, color: AppColors.activButtonColor()),
           ),
           TextSpan(
               text: title5,
@@ -60,7 +60,7 @@ class CustomRichTextWidget extends StatelessWidget {
             recognizer: TapGestureRecognizer()..onTap = onSubtitleTap6,
             text: ' $title6 ',
             style: AppTextStyle.regularStyle.copyWith(
-                fontSize: Dimens.fontSize14, color: AppColors.activButtonColor),
+                fontSize: Dimens.fontSize14, color: AppColors.activButtonColor()),
           ),
           TextSpan(
               text: title7,
