@@ -66,8 +66,10 @@ class ShopItemDetailController extends GetxController {
             ((X509Certificate cert, String host, int port) => true);
         return dioClient;
       };
+      print("fetch address request body : $request");
       var response =
           await dioService.post('/customer/shipping/get', data: request);
+      print("fetched address response : ${response.toString()}");
       if (response.statusCode == 200) {
         AllShippingAddressResponse getAddressResponse =
             AllShippingAddressResponse.fromJson(response.data);
@@ -196,7 +198,7 @@ class ShopItemDetailController extends GetxController {
       };
       var response =
           await dioService.post('/customer/orders/checkout', data: request);
-          // print("check order response : ${response.toString()}");
+      // print("check order response : ${response.toString()}");
       if (response.statusCode == 200) {
         OrderCheckoutResponse getAddressResponse =
             OrderCheckoutResponse.fromJson(response.data);
