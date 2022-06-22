@@ -54,7 +54,9 @@ class AddDeliveryAddressController extends GetxController {
     city.dispose();
   }
 
-  void addDeliveryAddress(BuildContext context,) async {
+  void addDeliveryAddress(
+    BuildContext context,
+  ) async {
     FocusScope.of(context).requestFocus(FocusNode());
     if (formKey.currentState!.validate()) {
       FocusScope.of(context).unfocus();
@@ -72,11 +74,13 @@ class AddDeliveryAddressController extends GetxController {
           "country": country.text.toString(),
           "is_default_address": "false",
         };
+        print("add address body : $request");
         var response = await DioClient().request(
             context: context,
             api: '/customer/shipping/create',
             method: Method.POST,
             params: request);
+        print("");
         ShippingAddressResponse getAddressResponse =
             ShippingAddressResponse.fromJson(response);
         if (getAddressResponse.status == Strings.success) {

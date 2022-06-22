@@ -81,10 +81,10 @@ packages:
   deposits_oneclick_checkout:
     dependency: transitive
     description:
-      name: deposits_oneclick_checkout
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.4"
+      path: "../deposits-oneclick-checkout"
+      relative: true
+    source: path
+    version: "0.0.5"
   dio:
     dependency: transitive
     description:

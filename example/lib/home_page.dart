@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               depositsUserID: '546',
                               merchantID: 1
                               );
-                      depositsEcommerceContext.showShop(context,customerID: 1);
+                      depositsEcommerceContext.showShop(context,customerID: 1, customerEmail: '');
                     },
                   )),
                Container(
