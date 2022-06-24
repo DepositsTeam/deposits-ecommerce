@@ -261,6 +261,7 @@ class ShopItemDetailController extends GetxController {
         userEmail: Storage.getValue(Constants.customerEmail),
         apiKey: oneClick.value,
         envMode: true, chargeFundsResponse: (response) {
+      print("response from oneclickpayment is : ${response.toJson().toString()}");
       if (response.data != null) {
         orderCheckOut(context, amount, response.data!.transactionId!, data);
       }
