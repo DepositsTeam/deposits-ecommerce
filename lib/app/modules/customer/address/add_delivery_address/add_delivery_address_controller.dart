@@ -74,13 +74,11 @@ class AddDeliveryAddressController extends GetxController {
           "country": country.text.toString(),
           "is_default_address": "false",
         };
-        print("add address body : $request");
         var response = await DioClient().request(
             context: context,
             api: '/customer/shipping/create',
             method: Method.POST,
             params: request);
-        print("");
         ShippingAddressResponse getAddressResponse =
             ShippingAddressResponse.fromJson(response);
         if (getAddressResponse.status == Strings.success) {

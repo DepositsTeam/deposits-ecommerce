@@ -1,4 +1,5 @@
 import 'package:deposits_ecommerce/app/common/utils/exports.dart';
+import 'package:deposits_ecommerce/app/services/logging.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'dart:io';
@@ -217,7 +218,8 @@ class SetUpShopController extends GetxController {
         Dio dioService = Dio();
         dioService = Dio(BaseOptions(
           baseUrl: dotenv.env['apiEmailBaseUrl'].toString(),
-        ));
+        ))
+          ..interceptors.add(Logging());
         (dioService.httpClientAdapter as DefaultHttpClientAdapter)
             .onHttpClientCreate = (HttpClient dioClient) {
           dioClient.badCertificateCallback =

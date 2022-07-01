@@ -141,6 +141,7 @@ void toggleIsSaveForLaters(bool value) {
                   successTitle: Strings.addressDeleted,
                   successMessage:Strings.addressDeletedSuccessfully,));
          deliveryAddressController.fetchAddress(context);
+         shopItemDetailController.fetchAddress(context);
       } else {
         return Utils.showSnackbar(
             context, Strings.error, response['message'].toString().toTitleCase(), AppColors.red);
