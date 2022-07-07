@@ -60,8 +60,8 @@ class _ShopButtonButtonState extends State<ShopButton> {
                 (states) => RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(2),
                   side: BorderSide(
-                    color: Color(Utils.hexToInt(
-                                widget.buttonConfig.buttonColor)) ==
+                    color: Utils.hexToInt(
+                                widget.buttonConfig.buttonColor) ==
                             AppColors.activButtonColor()
                         ? Colors.white
                         : widget.buttonConfig.buttonBorderColor!,
@@ -86,12 +86,12 @@ class _ShopButtonButtonState extends State<ShopButton> {
         backgroundColor: MaterialStateProperty.resolveWith<Color>(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
-              return Color(Utils.hexToInt(widget.buttonConfig.buttonColor))
+              return Utils.hexToInt(widget.buttonConfig.buttonColor)
                   .withOpacity(.50);
             }
             return !widget.buttonConfig.isBusy
-                ? Color(Utils.hexToInt(widget.buttonConfig.buttonColor))
-                : Color(Utils.hexToInt(widget.buttonConfig.buttonColor))
+                ? Utils.hexToInt(widget.buttonConfig.buttonColor)
+                : Utils.hexToInt(widget.buttonConfig.buttonColor)
                     .withOpacity(0.6);
           },
         ),

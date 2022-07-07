@@ -52,7 +52,7 @@ class ShopItemDetailController extends GetxController {
       isLoading(true);
       var request = {
         'merchant_id': Storage.getValue(Constants.merchantID),
-        'api_key': await Constants.apiKey(),
+        'api_key': sdkKey.value,
         'customer_id': Storage.getValue(Constants.customerID)
       };
       Dio dioService = Dio();
@@ -66,10 +66,10 @@ class ShopItemDetailController extends GetxController {
             ((X509Certificate cert, String host, int port) => true);
         return dioClient;
       };
-      print("fetch address request body : $request");
+      // print("fetch address request body : $request");
       var response =
           await dioService.post('/customer/shipping/get', data: request);
-      print("fetched address response : ${response.toString()}");
+      // print("fetched address response : ${response.toString()}");
       if (response.statusCode == 200) {
         AllShippingAddressResponse getAddressResponse =
             AllShippingAddressResponse.fromJson(response.data);
@@ -97,6 +97,8 @@ class ShopItemDetailController extends GetxController {
 
   void addDeliveryAddress(
     BuildContext context,
+    double amount,
+    ProductData data,
   ) async {
     FocusScope.of(context).requestFocus(FocusNode());
     if (formKey.currentState!.validate()) {
@@ -105,7 +107,7 @@ class ShopItemDetailController extends GetxController {
         isLoading(true);
         var request = {
           'merchant_id': Storage.getValue(Constants.merchantID),
-          'api_key': await Constants.apiKey(),
+          'api_key': sdkKey.value,
           'customer_id': Storage.getValue(Constants.customerID),
           "zip": zipCodeController.text.toString(),
           "address_name": addressName.text.toString(),
@@ -113,7 +115,7 @@ class ShopItemDetailController extends GetxController {
           "city": city.text.toString(),
           "state": state.text.toString(),
           "country": country.text.toString(),
-          "is_default_address": "false",
+          "is_default_address": "true",
         };
         Dio dioService = Dio();
         dioService = Dio(BaseOptions(
@@ -126,18 +128,20 @@ class ShopItemDetailController extends GetxController {
               ((X509Certificate cert, String host, int port) => true);
           return dioClient;
         };
+        // print("create address request body : $request");
         var response =
             await dioService.post('/customer/shipping/create', data: request);
-        // print("add delivery address response : ${response.toString()}");
+        // print("create delivery address response : ${response.toString()}");
         if (response.statusCode == 200) {
           ShippingAddressResponse getAddressResponse =
               ShippingAddressResponse.fromJson(response.data);
           if (getAddressResponse.status == Strings.success) {
-            return Utils.showSnackbar(
+            Utils.showSnackbar(
                 context,
                 Strings.success,
                 getAddressResponse.message.toString().toTitleCase(),
                 AppColors.green);
+            fetchAddress(context);
           } else {
             return Utils.showSnackbar(
                 context,
@@ -154,6 +158,11 @@ class ShopItemDetailController extends GetxController {
             context, Strings.error, e.toString(), AppColors.red);
       } finally {
         isLoading(false);
+        clickToShopItem(
+          context,
+          amount,
+          data,
+        );
       }
     }
   }
@@ -170,20 +179,24 @@ class ShopItemDetailController extends GetxController {
         'amount': amount,
         'currency': "USD",
         'customer_id': Storage.getValue(Constants.customerID),
-        'shipping_fee': data.shippingFee.toString(),
-        'tax': data.tax.toString(),
+        'shipping_fee': "0.00",
+        'tax': "0.00",
         'transaction_id': transactionId,
-        'zip': addresss.zip ?? '',
-        'street_address': addresss.streetAddress ?? '',
+        'zip': addresss.zip ?? zipCodeController.text.toString(),
+        'street_address':
+            addresss.streetAddress ?? streetAddressController.text.toString(),
         'address_name': addressName.text.toString(),
-        'city': addresss.city ?? '',
-        'state': addresss.state ?? '',
-        'country': addresss.country ?? '',
+        'city': addresss.city ?? city.text.toString(),
+        'state': addresss.state ?? state.text.toString(),
+        'country': addresss.country ?? country.text.toString(),
         'save_address': "false",
         'is_default_address': addresss.isDefaultAddress,
         'product_ids': [data.id],
         'quantity_list': ["1"],
-        'meta': {"address": addresss.streetAddress ?? ''}
+        'meta': {
+          "address":
+              addresss.streetAddress ?? streetAddressController.text.toString()
+        }
       };
       Dio dioService = Dio();
       dioService = Dio(BaseOptions(
@@ -196,22 +209,18 @@ class ShopItemDetailController extends GetxController {
             ((X509Certificate cert, String host, int port) => true);
         return dioClient;
       };
+      // print("checkout order request body : $request");
       var response =
           await dioService.post('/customer/orders/checkout', data: request);
-      // print("check order response : ${response.toString()}");
       if (response.statusCode == 200) {
         OrderCheckoutResponse getAddressResponse =
             OrderCheckoutResponse.fromJson(response.data);
         if (getAddressResponse.status == Strings.success) {
-          if (isSaveForLater.isTrue) {
-            addDeliveryAddress(context);
-          } else {
-            return Utils.showSnackbar(
-                context,
-                Strings.success,
-                getAddressResponse.message.toString().toTitleCase(),
-                AppColors.green);
-          }
+          // return Utils.showSnackbar(
+          //     context,
+          //     Strings.success,
+          //     getAddressResponse.message.toString().toTitleCase(),
+          //     AppColors.green);
         } else {
           return Utils.showSnackbar(
               context,
@@ -261,10 +270,19 @@ class ShopItemDetailController extends GetxController {
         userEmail: Storage.getValue(Constants.customerEmail),
         apiKey: oneClick.value,
         envMode: true, chargeFundsResponse: (response) {
+      // print(
+      //     "response from oneclickpayment is : ${response.toJson().toString()}");
       if (response.data != null) {
         orderCheckOut(context, amount, response.data!.transactionId!, data);
+        fetchAddress(context);
       }
       shopContext?.checkoutEvent.add(response);
+      //load deposit-ecommerce env variable and mode
+      Utils.getEnviromentMode();
+      Utils.loadEnvFile();
+      //load one-click env variables and mode
+      GetStorage.init();
+      dotenv.load(fileName:'packages/deposits_oneclick_checkout/lib/app/common/assets/.env');
     });
   }
 }

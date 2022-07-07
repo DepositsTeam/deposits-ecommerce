@@ -59,7 +59,8 @@ class _EditAddressState extends State<EditAddress> {
         if (controller.isLoading.value) {
           return Utils.loader();
         }
-        return editAddressBody();
+        return GetBuilder<EditAddressController>(
+            builder: (controller) =>editAddressBody());
       }),
     );
   }
@@ -249,7 +250,7 @@ class _EditAddressState extends State<EditAddress> {
 
 //--------------------------------------------------------
   Widget makeDefault() {
-    return Obx(() => CheckboxListTile(
+    return  CheckboxListTile(
           value: widget.address.isDefaultAddress == 'true'
               ? true
               : controller.isDefaultAddressSet.value,
@@ -266,12 +267,12 @@ class _EditAddressState extends State<EditAddress> {
           onChanged: (value) {
             controller.toggleDefaultAddress(value!);
           },
-        ));
+        );
   }
 
 //--------------------------------------------------------
   Widget saveForLater() {
-    return Obx(() => CheckboxListTile(
+    return CheckboxListTile(
           value: controller.isSaveForLater.value,
           activeColor: AppColors.green,
           checkColor: AppColors.white,
@@ -286,7 +287,7 @@ class _EditAddressState extends State<EditAddress> {
           onChanged: (value) {
             controller.toggleIsSaveForLaters(value!);
           },
-        ));
+        );
   }
 //--------------------------------------------------------
 //--------------------------------------------------------

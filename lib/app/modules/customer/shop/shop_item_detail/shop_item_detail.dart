@@ -3,11 +3,11 @@ import 'package:deposits_ecommerce/app/common/utils/exports.dart';
 class ShopItemDetail extends StatefulWidget {
   final ProductData data;
   final DepositsEcommerceContext? shopContext;
-  const ShopItemDetail(
-      {Key? key,
-      required this.data,
-      this.shopContext,})
-      : super(key: key);
+  const ShopItemDetail({
+    Key? key,
+    required this.data,
+    this.shopContext,
+  }) : super(key: key);
 
   @override
   State<ShopItemDetail> createState() => _ShopItemDetailState();
@@ -15,7 +15,7 @@ class ShopItemDetail extends StatefulWidget {
 
 class _ShopItemDetailState extends State<ShopItemDetail>
     with WidgetsBindingObserver {
-       ShopItemDetailController get controller {
+  ShopItemDetailController get controller {
     return Get.put(ShopItemDetailController(shopContext: widget.shopContext));
   }
   // ShopItemDetailController controller = Get.put(ShopItemDetailController());
@@ -34,7 +34,7 @@ class _ShopItemDetailState extends State<ShopItemDetail>
       if (mounted) setState(() {});
     });
     controller.zipCodeController.addListener(() {
-     if (mounted) setState(() {});
+      if (mounted) setState(() {});
     });
     controller.country.addListener(() {
       if (mounted) setState(() {});
@@ -332,20 +332,34 @@ class _ShopItemDetailState extends State<ShopItemDetail>
 
 //------------------------------------------------
   Widget checkOutButton() {
-    var subTotal = widget.data.price == null || (widget.data.price != null && widget.data.price!.isEmpty)
+    var subTotal = widget.data.price == null ||
+            (widget.data.price != null && widget.data.price!.isEmpty)
         ? 0.00
         : double.parse(widget.data.price!.replaceAll(',', ''));
-    var taxFees = widget.data.shippingFee == null || (widget.data.shippingFee != null && widget.data.shippingFee!.isEmpty)
+    var taxFees = widget.data.shippingFee == null ||
+            (widget.data.shippingFee != null &&
+                widget.data.shippingFee!.isEmpty)
         ? 0.00
         : double.parse(widget.data.shippingFee.replaceAll(',', ''));
     var total = subTotal + taxFees;
-     
+
     double totalCharge = total;
     return Obx(() => Container(
         margin: const EdgeInsets.symmetric(vertical: (20)),
         child: CustomElevatedButton(
           onPressed: () {
-            controller.clickToShopItem(context, totalCharge, widget.data,);
+            if (controller.addresses.isEmpty) {
+              controller.addDeliveryAddress(context,
+                totalCharge,
+                widget.data,
+              );
+            } else {
+              controller.clickToShopItem(
+                context,
+                totalCharge,
+                widget.data,
+              );
+            }
           },
           minWidth: Get.width,
           title: Strings.checkout,
@@ -357,8 +371,8 @@ class _ShopItemDetailState extends State<ShopItemDetail>
                   : AppColors.white),
           buttonColor:
               (controller.validateInput() || controller.addresses.isNotEmpty)
-                  ? AppColors.activButtonColor()
-                  : AppColors.inActivButtonColor(),
+                  ? /*Color(0xFF0DB9E9)*/ AppColors.activButtonColor()
+                  : /*Color(0xFFBDF3FC)*/ AppColors.inActivButtonColor(),
         )));
   }
 
@@ -389,20 +403,23 @@ class _ShopItemDetailState extends State<ShopItemDetail>
       padding: const EdgeInsets.only(
         bottom: 25,
       ),
-      child: CustomSvgimage(image: AppImages.depositsLogo,
-      width: 200,),
+      child: CustomSvgimage(
+        image: AppImages.depositsLogo,
+        width: 200,
+      ),
     );
   }
 
 //------------------------------------------------
   Widget shippingInfo() {
-   
-    var subTotal = widget.data.price == null || (widget.data.price != null && widget.data.price!.isEmpty)
+    var subTotal = widget.data.price == null ||
+            (widget.data.price != null && widget.data.price!.isEmpty)
         ? 0.00
         : double.parse(widget.data.price!.replaceAll(',', ''));
 
-
-    var taxFees = widget.data.shippingFee == null || (widget.data.shippingFee != null && widget.data.shippingFee!.isEmpty)
+    var taxFees = widget.data.shippingFee == null ||
+            (widget.data.shippingFee != null &&
+                widget.data.shippingFee!.isEmpty)
         ? 0.00
         : double.parse(widget.data.shippingFee.replaceAll(',', ''));
     var total = subTotal + taxFees;
@@ -472,9 +489,7 @@ class _ShopItemDetailState extends State<ShopItemDetail>
       title: addresss.streetAddress ?? '',
       leading: CustomSvgimage(image: AppImages.location),
       onTap: () {
-        Utils.navigationPush(
-            context,
-            DeliveryAddress());
+        Utils.navigationPush(context, DeliveryAddress());
       },
       trailing: const Icon(Icons.arrow_forward_ios_sharp),
       subTitle:

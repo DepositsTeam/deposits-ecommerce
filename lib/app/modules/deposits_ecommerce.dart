@@ -18,6 +18,8 @@ class DepositsEcommerceContext {
 
   DepositsEcommerceContext(
       {this.depositsUserID, this.merchantID, this.apiKey, this.envMode}) {
+    GetStorage.init();
+    Utils.loadEnvFile();
     Storage.saveValue(Constants.envMode, envMode);
     Storage.saveValue("deposits_api_key", apiKey);
     Storage.saveValue(Constants.merchantID, merchantID.toString());
