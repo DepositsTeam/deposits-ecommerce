@@ -53,7 +53,9 @@ class DepositsEcommerceContext {
   }
 
   Future showProduct(BuildContext context,
-      {required ProductData data, required int? customerID , required String? customerEmail}) async {
+      {required ProductData data,
+      required int? customerID,
+      required String? customerEmail}) async {
     await Storage.saveValue(Constants.customerID, customerID.toString());
     await Storage.saveValue(Constants.customerEmail, customerEmail);
     await Utils.navigationPush(
@@ -170,7 +172,7 @@ class _HorizontalShopContainerState extends State<HorizontalShopContainer>
               color: AppColors.black),
           titleOnTap: () {},
           subtitle: Strings.seeAll,
-          subtitleStyle:  TextStyle(
+          subtitleStyle: TextStyle(
               fontSize: Dimens.fontSize16,
               fontWeight: FontWeight.w600,
               color: AppColors.borderButtonColor2()),
