@@ -3,7 +3,7 @@ import 'package:deposits_ecommerce/app/common/utils/exports.dart';
 class Storage {
   const Storage._();
 
-  static final GetStorage _storage = GetStorage();
+  static final GetStorage _storage = GetStorage("deposits-ecommerce");
 
   static GetStorage get storage => _storage;
 

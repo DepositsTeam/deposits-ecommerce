@@ -29,6 +29,15 @@ class Constants {
     return key;
   }
 
+  static bool setOneClickEnvMode() {
+    bool isDev = Utils.getEnviromentMode();
+    if (isDev) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   static String oneClickApiKey() {
     bool isDev = Utils.getEnviromentMode();
     print("isDev $isDev");

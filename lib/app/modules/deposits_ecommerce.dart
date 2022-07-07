@@ -18,10 +18,10 @@ class DepositsEcommerceContext {
 
   DepositsEcommerceContext(
       {this.depositsUserID, this.merchantID, this.apiKey, this.envMode}) {
-    GetStorage.init();
+    GetStorage.init("deposits-ecommerce");
     Utils.loadEnvFile();
     Storage.saveValue(Constants.envMode, envMode);
-    Storage.saveValue("deposits_api_key", apiKey);
+    Storage.saveValue(Constants.subClientApiKey, apiKey);
     Storage.saveValue(Constants.merchantID, merchantID.toString());
   }
 
@@ -36,6 +36,7 @@ class DepositsEcommerceContext {
   }
 
   Future showDashboard(BuildContext context) async {
+    print(Storage.storage.getKeys());
     String merchantID = Storage.getValue(Constants.merchantID).toString();
     await Utils.navigationPush(context, Dashboard(merchantID: "$merchantID"));
   }
@@ -85,7 +86,7 @@ Widget depositsMerchantWidget(
   required String apiKey,
 }) {
   HttpOverrides.global = MyHttpOverrides();
-  GetStorage.init();
+  GetStorage.init("deposits-ecommerce");
   Utils.loadEnvFile();
   Storage.removeValue(Constants.customColor);
   Storage.saveValue(Constants.customColor, buttonConfig.buttonColor);
@@ -107,7 +108,7 @@ Widget depositsCustomerWidget(
   required String customColor,
   required bool envMode,
 }) {
-  GetStorage.init();
+  GetStorage.init("deposits-ecommerce");
   Utils.loadEnvFile();
   Storage.removeValue(Constants.customColor);
   Storage.saveValue(Constants.customColor, customColor);
