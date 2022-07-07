@@ -269,7 +269,7 @@ class ShopItemDetailController extends GetxController {
         CheckoutButton.ButtonConfig(amount: amount, buttonColor: '0DB9E9'),
         userEmail: Storage.getValue(Constants.customerEmail),
         apiKey: oneClick.value,
-        envMode: true, chargeFundsResponse: (response) {
+        envMode: false, chargeFundsResponse: (response) {
       // print(
       //     "response from oneclickpayment is : ${response.toJson().toString()}");
       if (response.data != null) {
