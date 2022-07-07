@@ -28,7 +28,6 @@ class ShopsController extends GetxController {
   }
 
   Future<void> loadContent(BuildContext context) async {
-    // print(Storage.getValue(Constants.merchantID));
     if (Storage.hasData(Constants.merchantID)) {
       String merchantId = Storage.getValue(Constants.merchantID).toString();
       await fetchProducts(context, merchantId);
@@ -65,7 +64,7 @@ class ShopsController extends GetxController {
           return Utils.showSnackbar(context, Strings.error,
               response['message'].toString().toTitleCase(), AppColors.red);
         }
-      }else{
+      } else {
         isError(true);
         errorMessage.value = 'Connection timeout with API server';
       }
@@ -89,19 +88,19 @@ class ShopsController extends GetxController {
           api: '/merchant/get-info',
           method: Method.POST,
           params: request);
-       if(response != null){
-      GetSingleMerchantResponse merchantResponse =
-          GetSingleMerchantResponse.fromJson(response);
-      if (merchantResponse.status == Strings.success) {
-        merchantData = merchantResponse.data!.obs;
+      if (response != null) {
+        GetSingleMerchantResponse merchantResponse =
+            GetSingleMerchantResponse.fromJson(response);
+        if (merchantResponse.status == Strings.success) {
+          merchantData = merchantResponse.data!.obs;
+        } else {
+          return Utils.showSnackbar(context, Strings.error,
+              response['message'].toString().toTitleCase(), AppColors.red);
+        }
       } else {
-        return Utils.showSnackbar(context, Strings.error,
-            response['message'].toString().toTitleCase(), AppColors.red);
-      }
-    }else{
-      isError(true);
+        isError(true);
         errorMessage.value = 'Connection timeout with API server';
-    }
+      }
     } catch (e) {
       return Utils.showSnackbar(
           context, Strings.error, e.toString().toTitleCase(), AppColors.red);

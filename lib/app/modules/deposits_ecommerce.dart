@@ -17,17 +17,19 @@ class DepositsEcommerceContext {
   final addProductEvent = BehaviorSubject<dynamic>();
 
   DepositsEcommerceContext(
-      {this.depositsUserID, this.merchantID, this.apiKey, this.envMode}) {
-    GetStorage.init("deposits-ecommerce");
-    Utils.loadEnvFile();
-    Storage.saveValue(Constants.envMode, envMode);
-    Storage.saveValue(Constants.subClientApiKey, apiKey);
-    Storage.saveValue(Constants.merchantID, merchantID.toString());
-  }
+      {this.depositsUserID, this.merchantID, this.apiKey, this.envMode});
 
   // void productionMode(String isProd) {
   //   Storage.saveValue(Constants.envMode, isProd);
   // }
+
+  Future init() async {
+    Utils.loadEnvFile();
+    await GetStorage.init("deposits-ecommerce");
+    await Storage.saveValue(Constants.envMode, envMode);
+    await Storage.saveValue(Constants.subClientApiKey, apiKey);
+    await Storage.saveValue(Constants.merchantID, merchantID.toString());
+  }
 
   Future<SetupMerchantResponse?> setupShop(
     BuildContext context,
@@ -36,6 +38,7 @@ class DepositsEcommerceContext {
   }
 
   Future showDashboard(BuildContext context) async {
+    await init();
     print(Storage.storage.getKeys());
     String merchantID = Storage.getValue(Constants.merchantID).toString();
     await Utils.navigationPush(context, Dashboard(merchantID: "$merchantID"));
@@ -43,6 +46,7 @@ class DepositsEcommerceContext {
 
   Future showShop(BuildContext context,
       {required int? customerID, required String? customerEmail}) async {
+    await init();
     Storage.saveValue(Constants.customerID, customerID.toString());
     Storage.saveValue(Constants.customerEmail, customerEmail);
     await Utils.navigationPush(
@@ -57,6 +61,7 @@ class DepositsEcommerceContext {
       {required ProductData data,
       required int? customerID,
       required String? customerEmail}) async {
+    await init();
     await Storage.saveValue(Constants.customerID, customerID.toString());
     await Storage.saveValue(Constants.customerEmail, customerEmail);
     await Utils.navigationPush(
