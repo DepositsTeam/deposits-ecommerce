@@ -16,7 +16,7 @@ class Utils {
 
   static bool getEnviromentMode()  {
     final envMode = Storage.getValue(Constants.envMode);
-    // print('derived env $envMode');
+    print('derived env $envMode');
     return envMode;
   }
 

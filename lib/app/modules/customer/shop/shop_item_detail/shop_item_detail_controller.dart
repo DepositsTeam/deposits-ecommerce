@@ -66,7 +66,7 @@ class ShopItemDetailController extends GetxController {
             ((X509Certificate cert, String host, int port) => true);
         return dioClient;
       };
-      // print("fetch address request body : $request");
+      // print("fetch address request body : $request and url is: ${sdkbase.value}");
       var response =
           await dioService.post('/customer/shipping/get', data: request);
       // print("fetched address response : ${response.toString()}");
@@ -198,6 +198,8 @@ class ShopItemDetailController extends GetxController {
               addresss.streetAddress ?? streetAddressController.text.toString()
         }
       };
+      // print(
+      //     "checkout order request body : $request and url is: ${sdkbase.value}");
       Dio dioService = Dio();
       dioService = Dio(BaseOptions(
         baseUrl: sdkbase.value,
@@ -209,7 +211,6 @@ class ShopItemDetailController extends GetxController {
             ((X509Certificate cert, String host, int port) => true);
         return dioClient;
       };
-      // print("checkout order request body : $request");
       var response =
           await dioService.post('/customer/orders/checkout', data: request);
       if (response.statusCode == 200) {
@@ -269,19 +270,17 @@ class ShopItemDetailController extends GetxController {
         CheckoutButton.ButtonConfig(amount: amount, buttonColor: '0DB9E9'),
         userEmail: Storage.getValue(Constants.customerEmail),
         apiKey: oneClick.value,
-        envMode: false, chargeFundsResponse: (response) {
-      // print(
-      //     "response from oneclickpayment is : ${response.toJson().toString()}");
+        envMode: Constants.setOneClickEnvMode(), chargeFundsResponse: (response) {
+      print( "response from oneclickpayment is : ${response.toJson().toString()}");
+      //load deposit-ecommerce env variable and mode
+      Utils.getEnviromentMode();
+      Utils.loadEnvFile();
       if (response.data != null) {
         orderCheckOut(context, amount, response.data!.transactionId!, data);
         fetchAddress(context);
       }
       shopContext?.checkoutEvent.add(response);
-      //load deposit-ecommerce env variable and mode
-      Utils.getEnviromentMode();
-      Utils.loadEnvFile();
       //load one-click env variables and mode
-      GetStorage.init();
       dotenv.load(fileName:'packages/deposits_oneclick_checkout/lib/app/common/assets/.env');
     });
   }
