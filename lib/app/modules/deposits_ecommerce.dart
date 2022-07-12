@@ -34,6 +34,7 @@ class DepositsEcommerceContext {
   Future<SetupMerchantResponse?> setupShop(
     BuildContext context,
   ) async {
+    await init();
     await Utils.navigationPush(context, SetUpShop(shopContext: this));
   }
 
