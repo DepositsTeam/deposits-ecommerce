@@ -187,25 +187,25 @@ class _ShopSettingsState extends State<ShopSettings> {
           color: AppColors.hintColor.withOpacity(0.5),
           height: 1,
         ),
-        // CustomListTileWidget(
-        //   leading: CustomSvgimage(image: AppImages.deleteShop, color: AppColors.activButtonColor()),
-        //   title: Strings.deleteMyShop,
-        //   onTap: () {
-        //     Utils.navigationReplace(
-        //         context,
-        //         DeleteAccount());
-        //   },
-        //   trailing: const Icon(
-        //     Icons.arrow_forward_ios_sharp,
-        //     color: AppColors.borderColor,
-        //     size: Dimens.fontSize22,
-        //   ),
-        //   subTitle: '',
-        // ),
-        // Divider(
-        //   color: AppColors.hintColor.withOpacity(0.5),
-        //   height: 1,
-        // )
+        CustomListTileWidget(
+          leading: CustomSvgimage(image: AppImages.deleteShop, color: AppColors.activButtonColor()),
+          title: Strings.deleteMyShop,
+          onTap: () {
+            Utils.navigationReplace(
+                context,
+                DeleteAccount());
+          },
+          trailing: const Icon(
+            Icons.arrow_forward_ios_sharp,
+            color: AppColors.borderColor,
+            size: Dimens.fontSize22,
+          ),
+          subTitle: '',
+        ),
+        Divider(
+          color: AppColors.hintColor.withOpacity(0.5),
+          height: 1,
+        )
       ],
     );
   }
