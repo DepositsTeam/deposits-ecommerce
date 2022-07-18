@@ -8,7 +8,8 @@ class ShopSettings extends StatefulWidget {
 
 class _ShopSettingsState extends State<ShopSettings> {
   ShopSettingsController controller = Get.put(ShopSettingsController());
-
+  final DepositsEcommerceContext? shopContext = DepositsEcommerceContext();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -193,7 +194,7 @@ class _ShopSettingsState extends State<ShopSettings> {
           onTap: () {
             Utils.navigationReplace(
                 context,
-                DeleteAccount());
+                DeleteAccount(shopContext: shopContext));
           },
           trailing: const Icon(
             Icons.arrow_forward_ios_sharp,
