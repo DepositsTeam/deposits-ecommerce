@@ -3,6 +3,11 @@ import 'package:deposits_ecommerce/app/common/utils/exports.dart';
 class DeleteAccountController extends GetxController {
   var isDeleteShop = false.obs;
   var isLoading = false.obs;
+  final DepositsEcommerceContext shopContext;
+
+  DeleteAccountController({
+    required this.shopContext,
+  });
 
   void toggleDefaultAddress(bool value) {
     isDeleteShop.value = value;
@@ -28,6 +33,7 @@ class DeleteAccountController extends GetxController {
       DeleteResponse deleteMerchantResponse =
           DeleteResponse.fromJson(response);
       if (deleteMerchantResponse.status == Strings.success) {
+         shopContext.deleteShopEvent.add(deleteMerchantResponse);
         Utils.navigationReplace(
             context,
             SuccessfulMgs(

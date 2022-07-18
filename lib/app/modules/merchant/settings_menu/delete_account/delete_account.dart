@@ -1,14 +1,18 @@
 import 'package:deposits_ecommerce/app/common/utils/exports.dart';
 
 class DeleteAccount extends StatefulWidget {
-  DeleteAccount({Key? key}) : super(key: key);
+  final DepositsEcommerceContext? shopContext;
+ const DeleteAccount({Key? key,  this.shopContext}) : super(key: key);
 
   @override
   State<DeleteAccount> createState() => _DeleteAccountState();
 }
 
 class _DeleteAccountState extends State<DeleteAccount> {
-  DeleteAccountController controller = Get.put(DeleteAccountController());
+  // DeleteAccountController controller = Get.put(DeleteAccountController());
+  DeleteAccountController get controller {
+    return Get.put(DeleteAccountController(shopContext: widget.shopContext!));
+  }
 
   @override
   Widget build(BuildContext context) {

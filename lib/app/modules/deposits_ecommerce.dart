@@ -13,6 +13,7 @@ class DepositsEcommerceContext {
   final bool? envMode;
 
   final setupShopEvent = BehaviorSubject<SetupMerchantResponse>();
+  final deleteShopEvent = BehaviorSubject<DeleteResponse>();
   final checkoutEvent = BehaviorSubject<dynamic>();
   final addProductEvent = BehaviorSubject<dynamic>();
 
