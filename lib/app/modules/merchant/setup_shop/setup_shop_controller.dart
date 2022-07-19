@@ -154,7 +154,7 @@ class SetUpShopController extends GetxController {
           Storage.saveValue(Strings.isStoreSetUpComplete, true);
 
           shopContext.setupShopEvent.add(setupMerchantResponse);
-          Utils.loadEnvFile();
+          // Utils.loadEnvFile();
           // await GetStorage.init("deposits-ecommerce");
           Utils.navigationReplace(context,
               Dashboard(
