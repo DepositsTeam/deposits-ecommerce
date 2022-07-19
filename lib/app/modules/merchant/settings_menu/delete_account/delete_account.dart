@@ -35,6 +35,7 @@ class _DeleteAccountState extends State<DeleteAccount> {
           return Utils.loader();
         }
         return GetBuilder<DeleteAccountController>(
+            init: DeleteAccountController(shopContext: widget.shopContext!),
             builder: (controller) => deleteAccountContainer());
       }),
     );
