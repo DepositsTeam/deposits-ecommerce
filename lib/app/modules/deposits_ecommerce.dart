@@ -36,12 +36,13 @@ class DepositsEcommerceContext {
     BuildContext context,
   ) async {
     await init();
+    print('setupshop hashCode ${this.hashCode}');
     await Utils.navigationPush(context, SetUpShop(shopContext: this));
   }
 
   Future showDashboard(BuildContext context) async {
     await init();
-    print(Storage.storage.getKeys());
+    print('showDashboard hashCode ${this.hashCode}');
     String merchantID = Storage.getValue(Constants.merchantID).toString();
     await Utils.navigationPush(context, Dashboard(merchantID: "$merchantID", shopContext: this));
   }

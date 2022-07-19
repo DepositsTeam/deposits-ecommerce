@@ -148,10 +148,10 @@ class SetUpShopController extends GetxController {
         // final MerchantData setupData = MerchantData.fromJson(respJson["data"]);
 
         if (setupMerchantResponse.status == Strings.success) {
-          Storage.removeValue(Constants.merchantID);
-          Storage.saveValue(
+         await Storage.removeValue(Constants.merchantID);
+         await Storage.saveValue(
               Constants.merchantID, setupMerchantResponse.data!.id.toString());
-          Storage.saveValue(Strings.isStoreSetUpComplete, true);
+         await Storage.saveValue(Strings.isStoreSetUpComplete, true);
 
           shopContext.setupShopEvent.add(setupMerchantResponse);
           // Utils.loadEnvFile();

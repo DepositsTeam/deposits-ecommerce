@@ -15,6 +15,7 @@ class DeleteAccountController extends GetxController {
   }
 
   void deletShop(BuildContext context) async {
+    
     if (isDeleteShop.isFalse) {
       return Utils.showSnackbar(context, Strings.error,
           'Please check to aggree to deleting your account', AppColors.red);
@@ -33,6 +34,7 @@ class DeleteAccountController extends GetxController {
       DeleteResponse deleteMerchantResponse =
           DeleteResponse.fromJson(response);
       if (deleteMerchantResponse.status == Strings.success) {
+        print('shopCOntext hasCode ${shopContext.hashCode}');
          shopContext.deleteShopEvent.add(deleteMerchantResponse);
         Utils.navigationReplace(
             context,
