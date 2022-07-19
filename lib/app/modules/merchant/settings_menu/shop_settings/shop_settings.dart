@@ -9,7 +9,6 @@ class ShopSettings extends StatefulWidget {
 
 class _ShopSettingsState extends State<ShopSettings> {
   ShopSettingsController controller = Get.put(ShopSettingsController());
-  final DepositsEcommerceContext? shopContext = DepositsEcommerceContext();
   
   @override
   Widget build(BuildContext context) {
