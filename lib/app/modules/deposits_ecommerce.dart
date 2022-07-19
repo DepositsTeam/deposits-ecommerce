@@ -43,7 +43,7 @@ class DepositsEcommerceContext {
     await init();
     print(Storage.storage.getKeys());
     String merchantID = Storage.getValue(Constants.merchantID).toString();
-    await Utils.navigationPush(context, Dashboard(merchantID: "$merchantID"));
+    await Utils.navigationPush(context, Dashboard(merchantID: "$merchantID", shopContext: this));
   }
 
   Future showShop(BuildContext context,

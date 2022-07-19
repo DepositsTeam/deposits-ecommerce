@@ -1,6 +1,7 @@
 import 'package:deposits_ecommerce/app/common/utils/exports.dart';
 class ShopSettings extends StatefulWidget {
-  const ShopSettings({Key? key}) : super(key: key);
+  final DepositsEcommerceContext? shopContext;
+  const ShopSettings({Key? key, this.shopContext}) : super(key: key);
 
   @override
   State<ShopSettings> createState() => _ShopSettingsState();
@@ -194,7 +195,7 @@ class _ShopSettingsState extends State<ShopSettings> {
           onTap: () {
             Utils.navigationReplace(
                 context,
-                DeleteAccount(shopContext: shopContext));
+                DeleteAccount(shopContext: widget.shopContext));
           },
           trailing: const Icon(
             Icons.arrow_forward_ios_sharp,

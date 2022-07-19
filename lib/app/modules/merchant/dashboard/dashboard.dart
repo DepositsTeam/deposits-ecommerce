@@ -2,7 +2,8 @@ import 'package:deposits_ecommerce/app/common/utils/exports.dart';
 
 class Dashboard extends StatefulWidget {
   final String merchantID;
-  Dashboard({Key? key, required this.merchantID}) : super(key: key);
+  final DepositsEcommerceContext? shopContext;
+  const Dashboard({Key? key, required this.merchantID, this.shopContext}) : super(key: key);
 
   @override
   State<Dashboard> createState() => _DashboardState();
@@ -31,7 +32,7 @@ class _DashboardState extends State<Dashboard> {
                   Products(
                     merchantID: widget.merchantID,
                   ),
-                  ShopSettings(),
+                  ShopSettings(shopContext: widget.shopContext),
                 ],
               ),
             ),
