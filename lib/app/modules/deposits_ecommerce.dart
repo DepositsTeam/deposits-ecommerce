@@ -25,7 +25,7 @@ class DepositsEcommerceContext {
   // }
 
   Future init() async {
-    Utils.loadEnvFile();
+    await Utils.loadEnvFile();
     await GetStorage.init("deposits-ecommerce");
     await Storage.saveValue(Constants.envMode, envMode);
     await Storage.saveValue(Constants.subClientApiKey, apiKey);
@@ -36,13 +36,11 @@ class DepositsEcommerceContext {
     BuildContext context,
   ) async {
     await init();
-    print('setupshop hashCode ${this.hashCode}');
     await Utils.navigationPush(context, SetUpShop(shopContext: this));
   }
 
   Future showDashboard(BuildContext context) async {
     await init();
-    print('showDashboard hashCode ${this.hashCode}');
     String merchantID = Storage.getValue(Constants.merchantID).toString();
     await Utils.navigationPush(context, Dashboard(merchantID: "$merchantID", shopContext: this));
   }

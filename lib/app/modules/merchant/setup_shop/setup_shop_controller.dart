@@ -142,20 +142,14 @@ class SetUpShopController extends GetxController {
 
         SetupMerchantResponse setupMerchantResponse =
             SetupMerchantResponse.fromJson(response);
-        // Map<String, dynamic> respJson = Map<String, dynamic>.from(response);
-        // final String status = respJson['status'] as String;
-        // final String message = respJson['message'] as String;
-        // final MerchantData setupData = MerchantData.fromJson(respJson["data"]);
 
         if (setupMerchantResponse.status == Strings.success) {
          await Storage.removeValue(Constants.merchantID);
-         await Storage.saveValue(
-              Constants.merchantID, setupMerchantResponse.data!.id.toString());
+         await Storage.saveValue(Constants.merchantID, setupMerchantResponse.data!.id.toString());
          await Storage.saveValue(Strings.isStoreSetUpComplete, true);
 
           shopContext.setupShopEvent.add(setupMerchantResponse);
-          // Utils.loadEnvFile();
-          // await GetStorage.init("deposits-ecommerce");
+
           Utils.navigationReplace(context,
               Dashboard(
                 merchantID: setupMerchantResponse.data!.id.toString(),

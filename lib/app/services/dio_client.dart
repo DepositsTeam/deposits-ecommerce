@@ -16,8 +16,6 @@ class DioClient {
     Dio _dio = Dio();
     _dio = Dio(BaseOptions(
       baseUrl: await Constants.baseUrl(),
-      //connectTimeout: 5000,
-      //receiveTimeout: 3000,
     ))
       ..interceptors.add(Logging());
     (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
@@ -31,20 +29,18 @@ class DioClient {
     try {
       if (method == Method.POST) {
         response = await _dio
-            .post(api, queryParameters: params)
-            .timeout(Constants.timeout);
+            .post(api, queryParameters: params);
   
       } else if (method == Method.FORM) {
         response =
-            await _dio.post(api, data: payload).timeout(Constants.timeout);
+            await _dio.post(api, data: payload);
       } else if (method == Method.DELETE) {
-        response = await _dio.delete(api).timeout(Constants.timeout);
+        response = await _dio.delete(api);
       } else if (method == Method.PATCH) {
-        response = await _dio.patch(api).timeout(Constants.timeout);
+        response = await _dio.patch(api);
       } else {
         response = await _dio
-            .get(api, queryParameters: params)
-            .timeout(Constants.timeout);
+            .get(api, queryParameters: params);
       }
      
       return response.data;

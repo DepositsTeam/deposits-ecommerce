@@ -1,16 +1,19 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
-import '../utils/utils.dart';
+ import '../../../deposits_ecommerce.dart';
 
 class Constants {
   //base url
   static Future<String> baseUrl() async {
     bool isDev = await Utils.getEnviromentMode();
+    print("isDev baseurl $isDev");
     var url = '';
     if (isDev) {
       url = dotenv.env['baseUrlSandbox'].toString();
+      // url = Storage.getValue('baseUrlSandbox').toString();
+      print('derived staging base url is $url');
     } else {
       url = dotenv.env['baseUrlLive'].toString();
+      // url = Storage.getValue('baseUrlLive').toString();
+      print('derived prod base url is $url');
     }
     // print('URL $url - $isDev');
     return url;
@@ -18,12 +21,16 @@ class Constants {
 
   static Future<String> apiKey() async {
     bool isDev = await Utils.getEnviromentMode();
-    // print("isDev $isDev");
+    print("isDev apikey $isDev");
     var key = '';
     if (isDev) {
       key = dotenv.env['sdkApiKeySandbox'].toString();
+      // key = Storage.getValue('sdkApiKeySandbox').toString();
+      print('derived staging api key is $key');
     } else {
       key = dotenv.env['sdkApiKeyLive'].toString();
+      // key = Storage.getValue('sdkApiKeyLive').toString();
+      print('derived prod api key is $key');
     }
     // print("api key $key");
     return key;
@@ -57,8 +64,12 @@ class Constants {
     var key = '';
     if (isDev) {
       key = dotenv.env['sdkApiKeySandbox'].toString();
+      // key = Storage.getValue('sdkApiKeySandbox').toString();
+      print('derived staging api key is $key');
     } else {
       key = dotenv.env['sdkApiKeyLive'].toString();
+      // key = Storage.getValue('sdkApiKeyLive').toString();
+      print('derived prod api key is $key');
     }
     // print("api key $key");
     return key;
@@ -69,8 +80,12 @@ class Constants {
     var url = '';
     if (isDev) {
       url = dotenv.env['baseUrlSandbox'].toString();
+      // url = Storage.getValue('baseUrlSandbox').toString();
+      print('derived staging base url is $url');
     } else {
       url = dotenv.env['baseUrlLive'].toString();
+      // url = Storage.getValue('baseUrlLive').toString();
+      print('derived prod base url is $url');
     }
     // print('URL $url - $isDev');
     return url;

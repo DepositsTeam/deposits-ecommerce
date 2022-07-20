@@ -7,7 +7,6 @@ class AppColors {
   // static const Color activButtonColor = Color(0xFF0DB9E9);
   static Color activButtonColor() {
     var storedcolor = Storage.getValue(Constants.customColor);
-    print('Stored color is $storedcolor');
     if (storedcolor == null) {
       return const Color(0xFF0DB9E9);
     } else {
@@ -18,7 +17,6 @@ class AppColors {
   // static const Color inActivButtonColor = Color(0xFFBDF3FC);
   static Color inActivButtonColor() {
     var storedcolor = Storage.getValue(Constants.customColor);
-    print('Stored in activecolor is $storedcolor');
     if (storedcolor == null) {
       return const Color(0xFFBDF3FC);
     } else {
@@ -29,7 +27,6 @@ class AppColors {
   // static const Color borderButtonColor = Color(0xFF0D7FE9);
   static Color borderButtonColor() {
     var storedcolor = Storage.getValue(Constants.customColor);
-    print('Stored bordercolor is $storedcolor');
     if (storedcolor == null) {
       return const Color(0xFF4C97FA);
     } else {
@@ -40,7 +37,6 @@ class AppColors {
   // static const Color borderButtonColor2 = Color(0xFF0DB9E9);
   static Color borderButtonColor2() {
     var storedcolor = Storage.getValue(Constants.customColor);
-    print('Stored borderbuttoncolor is $storedcolor');
     if (storedcolor == null) {
       return const Color(0xFF0DB9E9);
     } else {

@@ -6,7 +6,7 @@ class Utils {
   // static bool envLoaded = false;
 
   static Widget loader() {
-    return  Center(
+    return Center(
       child: SpinKitFadingCircle(
         color: AppColors.activButtonColor(),
         size: 20,
@@ -14,7 +14,7 @@ class Utils {
     );
   }
 
-  static bool getEnviromentMode()  {
+  static bool getEnviromentMode() {
     final envMode = Storage.getValue(Constants.envMode);
     print('derived env $envMode');
     return envMode;
@@ -45,11 +45,9 @@ class Utils {
     BuildContext context,
     Widget screen,
   ) async {
-    // print('/${screen.toStringShort()}');
     return await Navigator.push(
         context,
         MaterialPageRoute(
-            // settings: RouteSettings(name: '/${screen.toStringShort()}'),
             builder: (context) => screen));
   }
 
@@ -98,16 +96,23 @@ class Utils {
   }
 
   static loadEnvFile() async {
-    // if (envLoaded == false) {
     await dotenv.load(
         fileName: 'packages/deposits_ecommerce/lib/app/common/assets/.env');
-    // envLoaded = true;
-    //   print("Env Loaded");
-    // }
+
+    await Storage.saveValue('apiMapKey', dotenv.env['apiMapKey']);
+    await Storage.saveValue('sdkApiKeySandbox', dotenv.env['sdkApiKeySandbox']);
+    await Storage.saveValue('sdkApiKeyLive', dotenv.env['sdkApiKeyLive']);
+    await Storage.saveValue('apiKeySandbox', dotenv.env['apiKeySandbox']);
+    await Storage.saveValue('apiKeyLive', dotenv.env['apiKeyLive']);
+    await Storage.saveValue('baseUrlSandbox', dotenv.env['baseUrlSandbox']);
+    await Storage.saveValue('baseUrlLive', dotenv.env['baseUrlLive']);
+    await Storage.saveValue('API_KEY', dotenv.env['API_KEY']);
+    await Storage.saveValue('API_KEY_TEST', dotenv.env['API_KEY_TEST']);
+    await Storage.saveValue('apiEmailBaseUrl', dotenv.env['apiEmailBaseUrl']);
+    await Storage.saveValue('apiEmailKey', dotenv.env['apiEmailKey']);
   }
 
-    static Color hexToInt(String hex) {
+  static Color hexToInt(String hex) {
     return Color(int.parse("0xFF$hex"));
   }
-
 }
