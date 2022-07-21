@@ -4,6 +4,8 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'dart:io';
 
+import 'package:intl/intl.dart';
+
 class SetUpShopController extends GetxController {
   var isLoading = false.obs;
   var isDepositsIdDerived = false.obs;
@@ -144,17 +146,21 @@ class SetUpShopController extends GetxController {
             SetupMerchantResponse.fromJson(response);
 
         if (setupMerchantResponse.status == Strings.success) {
-         await Storage.removeValue(Constants.merchantID);
-         await Storage.saveValue(Constants.merchantID, setupMerchantResponse.data!.id.toString());
-         await Storage.saveValue(Strings.isStoreSetUpComplete, true);
-
           shopContext.setupShopEvent.add(setupMerchantResponse);
+          await Storage.saveValue(Strings.isStoreSetUpComplete, true);
 
-          Utils.navigationReplace(context,
-              Dashboard(
-                merchantID: setupMerchantResponse.data!.id.toString(),
-                shopContext: shopContext,
+          Utils.navigationReplace(
+              context,
+              SuccessfulMgs(
+                successTitle: Strings.storeCreatedSuccessfully,
+                successMessage: DateFormat.jm().format(
+                    DateTime.parse(DateTime.now().toString()).toLocal()),
               ));
+          // Utils.navigationReplace(context,
+          //     Dashboard(
+          //       merchantID: setupMerchantResponse.data!.id.toString(),
+          //       shopContext: shopContext,
+          //     ));
         } else {
           return Utils.showSnackbar(
               context,

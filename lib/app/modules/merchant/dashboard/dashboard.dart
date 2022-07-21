@@ -16,9 +16,10 @@ class _DashboardState extends State<Dashboard> {
     return GetBuilder<DashboardController>(
       init: controller,
       builder: (controller) {
-        if (!Storage.hasData(Constants.merchantID)) {
-          Storage.saveValue(Constants.merchantID, widget.merchantID);
-        }
+        // if (!Storage.hasData(Constants.merchantID)) {
+        //   Storage.saveValue(Constants.merchantID, widget.merchantID);
+        // }
+        print('merchant id on dashboard page is ${widget.merchantID}');
 
         return Scaffold(
             body: SafeArea(

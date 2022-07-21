@@ -117,6 +117,7 @@ class Strings {
   static const productUpdatedSuccessfully= 'Product updated successfully';
   static const taxUpdatedSuccessfully= 'Tax Fee updated successfully';
   static const storeUpdatedSuccessfully= 'Store updated successfully';
+  static const storeCreatedSuccessfully = 'Store created successfully';
   static const addressUpdatedSuccessfully= 'Address updated successfully';
   static const shippinPolicyUpdatedSuccessfully= 'Shipping and Return Policy updated successfully';
   static const pendingBalance= 'Pending Balance';
