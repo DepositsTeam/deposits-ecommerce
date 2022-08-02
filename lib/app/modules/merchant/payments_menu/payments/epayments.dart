@@ -52,13 +52,13 @@ class _EcomPaymentsState extends State<EcomPayments>
         },
         actions: controller.items.isNotEmpty
             ? [
-                Padding(
-                    padding: const EdgeInsets.only(right: 16.0),
-                    child: CustomInkwellWidget(
-                        onTap: () {
-                          filterItem();
-                        },
-                        child: CustomSvgimage(image: AppImages.filter))),
+                // Padding(
+                //     padding: const EdgeInsets.only(right: 16.0),
+                //     child: CustomInkwellWidget(
+                //         onTap: () {
+                //           filterItem();
+                //         },
+                //         child: CustomSvgimage(image: AppImages.filter))),
                 Padding(
                     padding: const EdgeInsets.only(right: 16.0),
                     child: CustomInkwellWidget(

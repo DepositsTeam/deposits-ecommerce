@@ -39,10 +39,11 @@ class DepositsEcommerceContext {
     await Utils.navigationPush(context, SetUpShop(shopContext: this));
   }
 
-  Future showDashboard(BuildContext context, String merchant ) async {
+  Future showDashboard(BuildContext context, String merchant) async {
     await init();
     await Storage.saveValue(Constants.merchantID, merchant.toString());
-    await Utils.navigationPush(context, Dashboard(merchantID: merchant.toString(), shopContext: this));
+    await Utils.navigationPush(
+        context, Dashboard(merchantID: merchant.toString(), shopContext: this));
   }
 
   Future showShop(BuildContext context,
@@ -72,6 +73,11 @@ class DepositsEcommerceContext {
           shopContext: this,
         ));
   }
+
+  void depositsEcommerceClearStorage() {
+    Storage.clearStorage();
+  }
+
 }
 
 class MyHttpOverrides extends HttpOverrides {
